@@ -97,6 +97,8 @@ AUTO_ADD_FRIEND: bool = True
 ALAPI_AI_CHECK: bool = True
 # 导入商店自带的三个商品
 IMPORT_DEFAULT_SHOP_GOODS: bool = True
+# 真寻是否自动更新
+AUTO_UPDATE_ZHENXUN: bool = False
 
 # 群管理员功能 与 对应权限
 admin_plugins_auth = {
