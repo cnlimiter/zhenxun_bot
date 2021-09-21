@@ -27,18 +27,12 @@ except ModuleNotFoundError:
 command_dict = {
     "早晚安": "zwa",
     "进群欢迎": "hy",
-    "每日开箱重置提醒": "kxcz",
-    "b站转发解析": "blpar",
-    "epic": "epic",
     "丢人爬": "pa",
     "原神黄历提醒": "almanac",
 }
 command_list = list(command_dict.values())
 command_info_dt = {
     "早晚安": "将会在每晚11:59晚安，在6:01早安哦",
-    "每日开箱重置提醒": "将会在每日00:01提示开箱重置！",
-    "epic": "将会在每日中午12:01发送可白嫖的epic游戏",
-    "原神黄历提醒": "将会在每日8:00发送当日的原神黄历",
 }
 
 
@@ -81,11 +75,7 @@ async def group_current_status(group_id: int):
     result = (
         f'（被动技能）\n早晚安通知：{"√" if await GroupRemind.get_status(group_id, "zwa") else "×"}\n'
         f'进群欢迎：{"√" if await GroupRemind.get_status(group_id, "hy") else "×"}\n'
-        f'每日开箱重置通知：{"√" if await GroupRemind.get_status(group_id, "kxcz") else "×"}\n'
-        f'b站转发解析：{"√" if await GroupRemind.get_status(group_id, "blpar") else "×"}\n'
         f'丢人爬：{"√" if await GroupRemind.get_status(group_id, "pa") else "×"}\n'
-        f'epic免费游戏：{"√" if await GroupRemind.get_status(group_id, "epic") else "×"}\n'
-        f'原神黄历提醒：{"√" if await GroupRemind.get_status(group_id, "almanac") else "×"}'
     )
     return result
 

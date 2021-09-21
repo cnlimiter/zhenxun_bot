@@ -1,4 +1,4 @@
-from nonebot.adapters.cqhttp import Bot, Event, Message
+from nonebot.adapters.cqhttp import Bot, Event, Message, GROUP
 from nonebot.plugin import on_command
 from nonebot.typing import T_State
 from nonebot.log import logger
@@ -6,11 +6,10 @@ from nonebot.log import logger
 import httpx
 
 __plugin_name__ = 'acg'
-
 __plugin_usage__ = '用法：发送‘acg’'
 
 
-acg = on_command('acg', aliases={'动漫'}, priority=5, block=True)
+acg = on_command('acg', aliases={'动漫'}, permission=GROUP, priority=5, block=True)
 
 
 @acg.handle()

@@ -172,7 +172,7 @@ plugins2exists_dict = {
 # default_status：加入群时功能的默认开关状态
 # cmd：关闭[cmd] 都会触发命令 关闭对应功能，cmd列表第一个词为统计的功能名称
 plugins2info_dict = {
-    "sign_in": {"level": 5, "default_status": True, "cmd": ["签到"]},
+    "sign_in": {"level": 3, "default_status": True, "cmd": ["签到"]},
     "send_img": {
         "level": 5,
         "default_status": True,
@@ -182,22 +182,24 @@ plugins2info_dict = {
     "mc": {"level": 3, "default_status": True, "cmd": ["mc"]},
     "send_setu": {"level": 9, "default_status": True, "cmd": ["色图", "涩图", "瑟图", "查色图"]},
     "white2black": {"level": 5, "default_status": True, "cmd": ["黑白图", "黑白草图"]},
-    "luxun": {"level": 5, "default_status": True, "cmd": ["鲁迅说", "鲁迅说过"]},
+    "luxun": {"level": 4, "default_status": True, "cmd": ["鲁迅说", "鲁迅说过"]},
     "fake_msg": {"level": 5, "default_status": True, "cmd": ["假消息"]},
     "buy": {"level": 5, "default_status": True, "cmd": ["购买", "购买道具"]},
     "my_gold": {"level": 5, "default_status": True, "cmd": ["我的金币"]},
     "my_props": {"level": 5, "default_status": True, "cmd": ["我的道具"]},
     "shop_handle": {"level": 5, "default_status": True, "cmd": ["商店"]},
     "update_pic": {"level": 5, "default_status": True, "cmd": ["图片", "操作图片", "修改图片"]},
-    "poke": {"level": 5, "default_status": True, "cmd": ["戳一戳", "拍一拍"]},
+    "poke": {"level": 3, "default_status": True, "cmd": ["戳一戳", "拍一拍"]},
+    "roll": {"level": 3, "default_status": True, "cmd": ["roll"]},
     "translate": {
-        "level": 5,
+        "level": 2,
         "default_status": True,
         "cmd": ["翻译", "英翻", "翻英", "日翻", "翻日", "韩翻", "翻韩"],
     },
     "russian": {"level": 5, "default_status": True, "cmd": ["俄罗斯轮盘", "俄罗斯转盘", "装弹"]},
     "gold_redbag": {"level": 5, "default_status": True, "cmd": ["塞红包", "红包", "抢红包"]},
     "cover": {"level": 5, "default_status": True, "cmd": ["b封面", "B封面"]},
+    "ai": {"level": 5, "default_status": True, "cmd": ["ai", "Ai", "AI", "aI"]},
 }
 
 if USE_CONFIG_FILE:
