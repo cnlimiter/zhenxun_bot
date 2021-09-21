@@ -1,6 +1,6 @@
 from nonebot import on_command, export, on_notice
 from nonebot.typing import T_State
-from nonebot.adapters.cqhttp import Bot, GroupMessageEvent, GROUP
+from nonebot.adapters.cqhttp import Bot, GroupMessageEvent, GROUP, GroupIncreaseNoticeEvent
 from .data_source import update_member_info
 
 __plugin_name__ = "更新群组成员列表"
