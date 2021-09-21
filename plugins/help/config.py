@@ -3,7 +3,6 @@ from configs.config import NICKNAME
 # 实用
 utility_help = {
     "update_pic": "一些对图片的操作 --> 指令:操作图片/图片/修改图片（包含 10 种图片操作）",
-    "songpicker2": "来一首歌听听？ --> 指令:点歌",
     "translate": "出国旅游助手(狗头) --> 指令:英翻/翻英/日翻/翻日/韩翻/翻韩",
     "cover": "快捷的b站封面获取方式 --> 指令:b封面 [连接/av/bv/cv/直播id]",
 }
@@ -20,7 +19,6 @@ entertainment_help = {
     "nickname": "区区昵称！ --> 指令:以后叫我xx(昵称)/我是谁/取消昵称",
     "russian": "紧张刺激的俄罗斯轮盘 --> 指令:俄罗斯轮盘帮助",
     "gold_redbag": f"运气项目又来啦！ --> 指令:塞红包/ 抢红包指令: 开/抢/戳一戳{NICKNAME}/ 退回:退回未抢完的红包",
-    "bilibili_sub": f"非常快捷的订阅播报 --> 指令:添加订阅 [主播/up/番剧] [id/番名/链接] / 删除订阅 [id]/ 查看订阅"
 }
 # 其他
 other_help = [

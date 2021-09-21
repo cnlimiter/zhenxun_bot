@@ -35,6 +35,7 @@ def get_auth_link(username: str) -> str:
         "redirect_uri":
             urllib.parse.urljoin(
                 config.github_self_host,  # type: ignore
+                #"/auth/login/github/callback"),
                 "/api/github/auth"),
         "scope":
             "admin:repo_hook,repo",

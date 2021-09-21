@@ -1,14 +1,4 @@
-#!/usr/bin/env python3
-# -*- coding: utf-8 -*-
-"""
-@Author         : yanyongyu
-@Date           : 2021-03-23 00:17:23
-@LastEditors    : yanyongyu
-@LastEditTime   : 2021-03-23 00:38:10
-@Description    : None
-@GitHub         : https://github.com/yanyongyu
-"""
-__author__ = "yanyongyu"
+
 
 from typing import Optional
 

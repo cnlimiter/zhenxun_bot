@@ -156,3 +156,4 @@ dmypy.json
 /venv/
 .idea
 configs/config.py
+/test/

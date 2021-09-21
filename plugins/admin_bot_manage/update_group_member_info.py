@@ -1,4 +1,4 @@
-from nonebot import on_command, export
+from nonebot import on_command, export, on_notice
 from nonebot.typing import T_State
 from nonebot.adapters.cqhttp import Bot, GroupMessageEvent, GROUP
 from .data_source import update_member_info
@@ -26,3 +26,11 @@ async def _(bot: Bot, event: GroupMessageEvent, state: T_State):
         await refresh_member_group.finish("更新群员信息成功！", at_sender=True)
     else:
         await refresh_member_group.finish("更新群员信息失败！", at_sender=True)
+
+group_increase_handle = on_notice(priority=1, block=False)
+
+
+@group_increase_handle.handle()
+async def _(bot: Bot, event: GroupIncreaseNoticeEvent, state: dict):
+    if event.user_id == int(bot.self_id):
+        await update_member_info(event.group_id)

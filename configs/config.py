@@ -1,5 +1,8 @@
+from pathlib import Path
 from typing import List, Optional, Tuple
 
+from configs.path_config import DATA_PATH
+from configs.utils.init_config import init_config
 from services.service_config import TL_M_KEY, SYSTEM_M_PROXY, ALAPI_M_TOKEN
 
 try:
@@ -26,7 +29,7 @@ TL_KEY: List[str] = []
 # 数据库（必要）
 # 如果填写了bind就不需要再填写后面的字段了#）
 # 示例："bind": "postgresql://user:password@127.0.0.1:5432/database"
-bind: str = "postgresql://robot_admin:66CcfpyM3LDa@103.151.217.63:5432/robot"  # 数据库连接链接
+bind: str = ""  # 数据库连接链接
 sql_name: str = ""
 user: str = ""
 password: str = ""
@@ -46,9 +49,8 @@ BAN_RESULT: str = "才不会给你发消息."
 
 # 插件配置
 # 参1：延迟撤回色图时间(秒)，0 为关闭 | 参2：监控聊天类型，0(私聊) 1(群聊) 2(群聊+私聊)
-WITHDRAW_SETU_TIME: Tuple[int, int] = (0, 1)
-# 参1：延迟撤回PIX图片时间(秒)，0 为关闭 | 参2：监控聊天类型，0(私聊) 1(群聊) 2(群聊+私聊)
-WITHDRAW_PIX_TIME: Tuple[int, int] = (0, 1)
+WITHDRAW_SETU_TIME: Tuple[int, int] = (90, 1)
+
 
 ADMIN_DEFAULT_AUTH: int = 5  # 默认群管理员权限
 
@@ -66,8 +68,8 @@ CHECK_NOTICE_INFO_CD = 300  # 群检测，个人权限检测等各种检测提�
 
 # 注：即在 MALICIOUS_CHECK_TIME 时间内触发相同命令 MALICIOUS_BAN_COUNT 将被ban MALICIOUS_BAN_TIME 分钟
 MALICIOUS_BAN_TIME: int = 30  # 恶意命令触发检测触发后ban的时长（分钟）
-MALICIOUS_BAN_COUNT: int = 8  # 恶意命令触发检测最大触发次数
-MALICIOUS_CHECK_TIME: int = 5  # 恶意命令触发检测规定时间内（秒）
+MALICIOUS_BAN_COUNT: int = 3  # 恶意命令触发检测最大触发次数
+MALICIOUS_CHECK_TIME: int = 3  # 恶意命令触发检测规定时间内（秒）
 
 # LEVEL
 DELETE_IMG_LEVEL: int = 7  # 删除图片权限
@@ -195,6 +197,13 @@ plugins2info_dict = {
     "gold_redbag": {"level": 5, "default_status": True, "cmd": ["塞红包", "红包", "抢红包"]},
     "cover": {"level": 5, "default_status": True, "cmd": ["b封面", "B封面"]},
 }
+
+if USE_CONFIG_FILE:
+    # 读取配置文件
+    plugins2info_dict, plugins2cd_dict, plugins2exists_dict = init_config(
+        plugins2info_dict, plugins2cd_dict, plugins2exists_dict, DATA_PATH
+    )
+
 
 if TL_M_KEY:
     TL_KEY = TL_M_KEY
