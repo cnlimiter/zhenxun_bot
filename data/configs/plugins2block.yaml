@@ -1,0 +1,19 @@
+PluginBlockLimit:
+  # 用户调用阻塞
+  # 即 当用户调用此功能还未结束时
+  # 用发送消息阻止用户重复调用此命令直到该命令结束
+  # key：模块名称
+  # status：此限制的开关状态
+  # check_type：'private'/'group'/'all'，限制私聊/群聊/全部
+  # limit_type：监听对象，以user_id或group_id作为键来限制，'user'：用户id，'group'：群id
+  #                                     示例：'user'：阻塞用户，'group'：阻塞群聊
+  # rst：回复的话，可以添加[at]，[uname]，[nickname]来对应艾特，用户群名称，昵称系统昵称
+  # rst 为 "" 或 None 时则不回复
+  # rst示例："[uname]你冲的太快了，[nickname]先生，请稍后再冲[at]"
+  # rst回复："老色批你冲的太快了，欧尼酱先生，请稍后再冲@老色批"
+  #      用户昵称↑     昵称系统的昵称↑          艾特用户↑
+  shop_handle:
+    status: true
+    check_type: all
+    limit_type: group
+    rst:

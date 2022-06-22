@@ -1,0 +1,162 @@
+PluginSettings:
+  # 模块与对应命令和对应群权限
+  # 用于生成帮助图片 和 开关功能
+  # key：模块名称
+  # level：需要的群等级
+  # default_status：加入群时功能的默认开关状态
+  # limit_superuser: 功能状态是否限制超级用户
+  # cmd: 关闭[cmd] 都会触发命令 关闭对应功能，cmd列表第一个词为统计的功能名称
+  # plugin_type: 帮助类别 示例：('原神相关',) 或 ('原神相关', 1)，1代表帮助命令列向排列，否则为横向排列
+  chat_message_handle:
+  # chat_message_handle：消息统计
+    level: 5
+    default_status: true
+    limit_superuser: false
+    cmd:
+    - 消息统计
+    plugin_type:
+    - 数据统计
+    - 1
+    cost_gold: 0
+  gold:
+  # gold：商店 - 我的金币
+    level: 5
+    default_status: true
+    limit_superuser: false
+    cmd:
+    - 商店
+    - 我的金币
+    - 商店 - 我的金币
+    plugin_type:
+    - 商店
+    cost_gold: 0
+  buy:
+  # buy：商店 - 购买道具
+    level: 5
+    default_status: true
+    limit_superuser: false
+    cmd:
+    - 商店
+    - 购买道具
+    - 商店 - 购买道具
+    plugin_type:
+    - 商店
+    cost_gold: 0
+  my_props:
+  # my_props：商店 - 我的道具
+    level: 5
+    default_status: true
+    limit_superuser: false
+    cmd:
+    - 商店
+    - 我的道具
+    - 商店 - 我的道具
+    plugin_type:
+    - 商店
+    cost_gold: 0
+  use:
+  # use：商店 - 使用道具
+    level: 5
+    default_status: true
+    limit_superuser: false
+    cmd:
+    - 商店
+    - 使用道具
+    - 商店 - 使用道具
+    plugin_type:
+    - 商店
+    cost_gold: 0
+  shop_handle:
+  # shop_handle：商店
+    level: 5
+    default_status: true
+    limit_superuser: false
+    cmd:
+    - 商店
+    plugin_type:
+    - 商店
+    cost_gold: 0
+  update_info:
+  # update_info：更新信息
+    level: 5
+    default_status: true
+    limit_superuser: false
+    cmd:
+    - 更新信息
+    plugin_type:
+    - normal
+    cost_gold: 0
+  nickname:
+  # nickname：昵称系统
+    level: 5
+    default_status: true
+    limit_superuser: false
+    cmd:
+    - 昵称
+    - 昵称系统
+    plugin_type:
+    - normal
+    cost_gold: 0
+  group_welcome_msg:
+  # group_welcome_msg：查看群欢迎消息
+    level: 5
+    default_status: true
+    limit_superuser: false
+    cmd:
+    - 查看群欢迎消息
+    plugin_type:
+    - normal
+    cost_gold: 0
+  word_clouds:
+  # word_clouds：词云
+    level: 5
+    default_status: true
+    limit_superuser: false
+    cmd:
+    - 今日词云
+    - 昨日词云
+    - 本周词云
+    - 词云
+    plugin_type:
+    - normal
+    cost_gold: 0
+  wbtop:
+  # wbtop：微博热搜
+    level: 5
+    default_status: true
+    limit_superuser: false
+    cmd:
+    - 微博热搜
+    plugin_type:
+    - normal
+    cost_gold: 0
+  poke:
+  # poke：戳一戳
+    level: 5
+    default_status: true
+    limit_superuser: false
+    cmd:
+    - 戳一戳
+    plugin_type:
+    - 其他
+    cost_gold: 0
+  sign_in:
+  # sign_in：签到
+    level: 5
+    default_status: true
+    limit_superuser: false
+    cmd:
+    - 签到
+    plugin_type:
+    - normal
+    cost_gold: 0
+  black_word:
+  # black_word：敏感词检测
+    level: 5
+    default_status: true
+    limit_superuser: false
+    cmd:
+    - 敏感词检测
+    plugin_type:
+    - 其他
+    cost_gold: 0

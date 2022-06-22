@@ -1,0 +1,19 @@
+PluginCountLimit:
+  # 命令每日次数限制
+  # 即 用户/群聊 每日可调用命令的次数 [数据内存存储，重启将会重置]
+  # 每日调用直到 00:00 刷新
+  # key：模块名称
+  # max_count: 每日调用上限
+  # status：此限制的开关状态
+  # limit_type：监听对象，以user_id或group_id作为键来限制，'user'：用户id，'group'：群id
+  #                                     示例：'user'：用户上限，'group'：群聊上限
+  # rst：回复的话，可以添加[at]，[uname]，[nickname]来对应艾特，用户群名称，昵称系统昵称
+  # rst 为 "" 或 None 时则不回复
+  # rst示例："[uname]你冲的太快了，[nickname]先生，请稍后再冲[at]"
+  # rst回复："老色批你冲的太快了，欧尼酱先生，请稍后再冲@老色批"
+  #      用户昵称↑     昵称系统的昵称↑          艾特用户↑
+  这是一个示例:
+    max_count: 5
+    status: true
+    limit_type: user
+    rst:

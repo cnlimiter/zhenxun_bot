@@ -1,0 +1,26 @@
+PluginCdLimit:
+  # 需要cd的功能
+  # 自定义的功能需要cd也可以在此配置
+  # key：模块名称
+  # cd：cd 时长（秒）
+  # status：此限制的开关状态
+  # check_type：'private'/'group'/'all'，限制私聊/群聊/全部
+  # limit_type：监听对象，以user_id或group_id作为键来限制，'user'：用户id，'group'：群id
+  #                                     示例：'user'：用户N秒内触发1次，'group'：群N秒内触发1次
+  # rst：回复的话，可以添加[at]，[uname]，[nickname]来对应艾特，用户群名称，昵称系统昵称
+  # rst 为 "" 或 None 时则不回复
+  # rst示例："[uname]你冲的太快了，[nickname]先生，请稍后再冲[at]"
+  # rst回复："老色批你冲的太快了，欧尼酱先生，请稍后再冲@老色批"
+  #      用户昵称↑     昵称系统的昵称↑          艾特用户↑
+  buy:
+    cd: 3
+    status: true
+    check_type: all
+    limit_type: user
+    rst:
+  sign_in:
+    cd: 5
+    status: true
+    check_type: all
+    limit_type: user
+    rst:

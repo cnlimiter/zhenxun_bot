@@ -1,0 +1,29 @@
+<component name="InspectionProjectProfileManager">
+  <profile version="1.0">
+    <option name="myName" value="Project Default" />
+    <inspection_tool class="PyPackageRequirementsInspection" enabled="true" level="WARNING" enabled_by_default="true">
+      <option name="ignoredPackages">
+        <value>
+          <list size="16">
+            <item index="0" class="java.lang.String" itemvalue="wheel" />
+            <item index="1" class="java.lang.String" itemvalue="multidict" />
+            <item index="2" class="java.lang.String" itemvalue="aiosmtplib" />
+            <item index="3" class="java.lang.String" itemvalue="asyncpg" />
+            <item index="4" class="java.lang.String" itemvalue="aioauth-client" />
+            <item index="5" class="java.lang.String" itemvalue="slim" />
+            <item index="6" class="java.lang.String" itemvalue="psycopg2-binary" />
+            <item index="7" class="java.lang.String" itemvalue="qiniu" />
+            <item index="8" class="java.lang.String" itemvalue="aiohttp-cors" />
+            <item index="9" class="java.lang.String" itemvalue="async_timeout" />
+            <item index="10" class="java.lang.String" itemvalue="elasticsearch" />
+            <item index="11" class="java.lang.String" itemvalue="elasticsearch-dsl" />
+            <item index="12" class="java.lang.String" itemvalue="aiohttp" />
+            <item index="13" class="java.lang.String" itemvalue="peewee" />
+            <item index="14" class="java.lang.String" itemvalue="wtforms" />
+            <item index="15" class="java.lang.String" itemvalue="msgpack" />
+          </list>
+        </value>
+      </option>
+    </inspection_tool>
+  </profile>
+</component>
