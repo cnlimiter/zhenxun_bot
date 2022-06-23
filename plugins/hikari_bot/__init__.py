@@ -10,6 +10,7 @@ from loguru import logger
 from nonebot import get_bot, on_command, on_message, get_driver
 from nonebot import require
 from nonebot.adapters.onebot.v11 import Message, MessageSegment, MessageEvent, ActionFailed, PrivateMessageEvent
+from nonebot.adapters.onebot.v11.permission import GROUP
 from nonebot.log import logger
 from nonebot.params import CommandArg
 from nonebot_plugin_htmlrender import text_to_pic
