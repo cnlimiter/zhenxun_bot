@@ -30,13 +30,25 @@ _max = 100
 EXCEED_NOTICE = f'您今天已经冲过{_max}次了，请明早5点后再来！'
 _nlmt = DailyNumberLimiter(_max)
 _flmt = FreqLimiter(3)
-__version__ = '0.3.1rc1'
 dir_path = Path(__file__).parent
 template_path = dir_path / "template"
 
-bot = on_command("wws", block=True, aliases={"WWS"}, priority=5)
+__zx_plugin_name__ = "战舰世界战绩"
+__plugin_usage__ = """
+usage：
+    战舰世界战绩查询
+    指令：
+        wws
+        wws 检查更新
+""".strip()
+__plugin_des__ = "战舰世界查询"
+__plugin_cmd__ = ["wws", "wws 检查更新"]
+__plugin_version__ = 0.3.1rc1
+__plugin_author__ = "cnlimiter"
+
+bot = on_command("wws", block=True, aliases={"WWS"}, permission=GROUP, priority=5)
 bot_listen = on_message(priority=5)
-bot_checkversion = on_command("wws 检查更新", priority=5)
+bot_checkversion = on_command("wws 检查更新", permission=GROUP, priority=5)
 driver = get_driver()
 
 
