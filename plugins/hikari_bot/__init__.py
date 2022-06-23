@@ -43,7 +43,7 @@ usage：
 """.strip()
 __plugin_des__ = "战舰世界查询"
 __plugin_cmd__ = ["wws", "wws 检查更新"]
-__plugin_version__ = 0.3.1rc1
+__plugin_version__ = 0.3.2
 __plugin_author__ = "cnlimiter"
 
 bot = on_command("wws", block=True, aliases={"WWS"}, permission=GROUP, priority=5)
