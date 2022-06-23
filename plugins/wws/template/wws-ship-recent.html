@@ -5,15 +5,9 @@
     <title>Title</title>
 </head>
 <style>
-
-    @font-face {
-        font-family: "Microsoft YaHei UI";
-        src: url("../../../resources/font/msyh.ttf");
-    }
-
     body {
         font-size: 26px;
-        font-family: simhei, serif;
+        font-family: "Microsoft YaHei UI";
     }
 
     .font-size {
@@ -55,7 +49,7 @@
 
 </style>
 <body>
-<div>
+   <div>
     <table id="ship-data" width="800" style="table-layout: fixed;">
         <tr>
             <td colspan="6" class="font-data" style="text-align: center;">
@@ -73,10 +67,7 @@
             <td colspan="6" style="text-align: center;background-color: {{prColor}}">{{prValue}}</td>
         </tr>
         <tr>
-            <td colspan="6" style="text-align: center;">记录时间</td>
-        </tr>
-        <tr>
-            <td colspan="6" class="greyColor" style="text-align: center;">{{recordTime}}</td>
+            <td colspan="6" style="text-align: center;">记录时间:{{recordTime}}</td>
         </tr>
         <tr>
             <td colspan="2" class="greyColor2 font-size">场次</td>
@@ -189,6 +180,10 @@
         <tr>
             <td colspan="6" class="font-data greyColor" style="text-align: center;">
                 <span>https://github.com/benx1n/HikariBot</span></td>
+        </tr>
+                <tr>
+            <td colspan="6" class="font-data greyColor" style="text-align: center;">
+                <span>由cnlimiter修改</span></td>
         </tr>
     </table>
 </div>
