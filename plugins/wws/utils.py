@@ -104,13 +104,13 @@ async def _gene_help_img(
     text: str,
     width: int,
     height: int
-                  ) -> MessageSegment:
+                  ) -> str:
     current_date = datetime.now()
     data = current_date.date()
     info_img = BuildImage(width, height, color=(255, 255, 255, 0), font_size=15)
     info_img.text((0, 0), f"{text}")
     info_img.save(WSS_PATH / f"{data}_help.png")
-    return image(f"{data}_help.png", "wss")
+    return WSS_PATH / f"{data}_help.png"
 
 
 def _gene_info_img(
