@@ -1,24 +1,22 @@
-import asyncio
-import re
-import traceback
-from asyncio.exceptions import TimeoutError
-from collections import defaultdict, namedtuple
-from datetime import datetime
-from pathlib import Path
 from typing import List
-
 import httpx
+import traceback
 import jinja2
-from bs4 import BeautifulSoup
-from httpx import ConnectTimeout
-from nonebot import get_driver
-from nonebot.adapters.onebot.v11 import MessageSegment, ActionFailed
-from nonebot.log import logger
-from nonebot_plugin_htmlrender import html_to_pic, text_to_pic
-
+import re
+import asyncio
+from pathlib import Path
 from .data_source import servers, set_shipparams, set_shipRecentparams, tiers, number_url_homes
-from .publicAPI import get_ship_byName, get_AccountIdByName
 from .utils import match_keywords
+from nonebot_plugin_htmlrender import html_to_pic, text_to_pic
+from nonebot.adapters.onebot.v11 import MessageSegment, ActionFailed
+from .publicAPI import get_ship_byName, get_AccountIdByName
+from collections import defaultdict, namedtuple
+from nonebot import get_driver
+from nonebot.log import logger
+from httpx import ConnectTimeout
+from asyncio.exceptions import TimeoutError
+from bs4 import BeautifulSoup
+from datetime import datetime
 
 dir_path = Path(__file__).parent
 template_path = dir_path / "template"
@@ -61,17 +59,15 @@ async def get_ShipInfo(qqid, info, bot):
                 param_server, info = await match_keywords(info, servers)
                 if param_server:
                     param_accountid = await get_AccountIdByName(param_server, str(info[0]))  # 剩余列表第一个是否为游戏名
-                    if param_accountid and param_accountid != 404:
+                    if isinstance(param_accountid, int):
                         info.remove(info[0])
                         url = 'https://api.wows.linxun.link/public/wows/account/v2/ship/info'
                         params = {
                             "server": param_server,
                             "accountId": param_accountid,
                         }
-                    elif param_accountid == 404:
-                        return '无法查询该游戏昵称Orz，请检查昵称是否存在'
                     else:
-                        return '发生了错误，有可能是网络波动，请稍后再试'
+                        return f"{param_accountid}"
                 else:
                     return '服务器参数似乎输错了呢'
             elif params and len(info) == 1:
@@ -94,10 +90,15 @@ async def get_ShipInfo(qqid, info, bot):
                     ShipSecletProcess[qqid] = ShipSlectState(False, None, shipList)
                     img = await text_to_pic(text=msg, css_path=str(template_path / "text-ship.css"), width=250)
                     await bot.send(MessageSegment.image(img))
-                    await asyncio.sleep(20)
+                    a = 0
+                    while a < 40 and not ShipSecletProcess[qqid].state:
+                        a += 1
+                        await asyncio.sleep(0.5)
                     if ShipSecletProcess[qqid].state and ShipSecletProcess[qqid].SlectIndex <= len(shipList):
                         params["shipId"] = shipList[ShipSecletProcess[qqid].SlectIndex - 1][0]
+                        ShipSecletProcess[qqid] = ShipSlectState(False, None, None)
                     else:
+                        ShipSecletProcess[qqid] = ShipSlectState(False, None, None)
                         return '已超时退出'
             else:
                 return '找不到船'
@@ -106,7 +107,7 @@ async def get_ShipInfo(qqid, info, bot):
         logger.info(f"下面是本次请求的参数，如果遇到了问题，请将这部分连同报错日志一起发送给麻麻哦\n{url}\n{params}")
         ranking = await get_MyShipRank_yuyuko(params)
         async with httpx.AsyncClient(headers=headers) as client:
-            resp = await client.get(url, params=params, timeout=20)
+            resp = await client.get(url, params=params, timeout=None)
             result = resp.json()
             logger.info(f"本次请求返回的状态码:{result['code']}")
             logger.info(f"本次请求服务器计算时间:{result['queryTime']}")
@@ -137,7 +138,7 @@ async def get_MyShipRank_yuyuko(params):
     try:
         url = 'https://api.wows.linxun.link/upload/numbers/data/upload/user/ship/rank'
         async with httpx.AsyncClient(headers=headers) as client:
-            resp = await client.get(url, params=params, timeout=20)
+            resp = await client.get(url, params=params, timeout=None)
             result = resp.json()
             if result['code'] == 200 and result['data']:
                 if result['data']['ranking']:
@@ -161,14 +162,14 @@ async def get_MyShipRank_Numbers(url, server):
     try:
         data = None
         async with httpx.AsyncClient() as client:
-            resp = await client.get(url, timeout=20)
+            resp = await client.get(url, timeout=None)
             if resp.content:
                 result = resp.json()
                 page_url = str(result['url']).replace("\\", "")
                 nickname = str(result['nickname'])
                 my_rank_url = f"{number_url_homes[server]}{page_url}"
                 async with httpx.AsyncClient() as client:
-                    resp = await client.get(my_rank_url, timeout=20)
+                    resp = await client.get(my_rank_url, timeout=None)
                     soup = BeautifulSoup(resp.content, 'html.parser')
                     data = soup.select_one(f'tr[data-nickname="{nickname}"]').select_one('td').string
         if data and data.isdigit():
@@ -190,7 +191,7 @@ async def post_MyShipRank_yuyuko(accountId, ranking, serverId, shipId):
                 "serverId": serverId,
                 "shipId": int(shipId)
             }
-            resp = await client.post(url, json=post_data, timeout=20)
+            resp = await client.post(url, json=post_data, timeout=None)
             result = resp.json()
             return
     except Exception:
@@ -236,7 +237,7 @@ async def get_ShipInfoRecent(qqid, info, bot):
                 param_server, info = await match_keywords(info, servers)
                 if param_server:
                     param_accountid = await get_AccountIdByName(param_server, str(info[0]))  # 剩余列表第一个是否为游戏名
-                    if param_accountid and param_accountid != 404:
+                    if isinstance(param_accountid, int):
                         info.remove(info[0])
                         url = 'https://api.wows.linxun.link/api/wows/recent/v2/recent/info/ship'
                         params = {
@@ -244,10 +245,8 @@ async def get_ShipInfoRecent(qqid, info, bot):
                             "accountId": param_accountid,
                             "day": day
                         }
-                    elif param_accountid == 404:
-                        return '无法查询该游戏昵称Orz，请检查昵称是否存在'
                     else:
-                        return '发生了错误，有可能是网络波动，请稍后再试'
+                        return f"{param_accountid}"
                 else:
                     return '服务器参数似乎输错了呢'
             elif params and len(info) == 1:
@@ -270,10 +269,15 @@ async def get_ShipInfoRecent(qqid, info, bot):
                     ShipSecletProcess[qqid] = ShipSlectState(False, None, shipList)
                     img = await text_to_pic(text=msg, css_path=template_path / "text-ship.css", width=250)
                     await bot.send(MessageSegment.image(img))
-                    await asyncio.sleep(20)
+                    a = 0
+                    while a < 40 and not ShipSecletProcess[qqid].state:
+                        a += 1
+                        await asyncio.sleep(0.5)
                     if ShipSecletProcess[qqid].state and ShipSecletProcess[qqid].SlectIndex <= len(shipList):
                         params["shipId"] = shipList[ShipSecletProcess[qqid].SlectIndex - 1][0]
+                        ShipSecletProcess[qqid] = ShipSlectState(False, None, None)
                     else:
+                        ShipSecletProcess[qqid] = ShipSlectState(False, None, None)
                         return '已超时退出'
             else:
                 return '找不到船'
@@ -281,7 +285,7 @@ async def get_ShipInfoRecent(qqid, info, bot):
             return '参数似乎出了问题呢'
         logger.info(f"下面是本次请求的参数，如果遇到了问题，请将这部分连同报错日志一起发送给麻麻哦\n{params}")
         async with httpx.AsyncClient(headers=headers) as client:
-            resp = await client.get(url, params=params, timeout=20)
+            resp = await client.get(url, params=params, timeout=None)
             result = resp.json()
         if result['code'] == 200 and result['data']:
             template = env.get_template("wws-ship-recent.html")

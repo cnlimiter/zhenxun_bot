@@ -1,16 +1,14 @@
-import re
-import traceback
-from asyncio.exceptions import TimeoutError
 from typing import List
-
 import httpx
-from httpx import ConnectTimeout
-from nonebot import get_driver
-from nonebot.log import logger
-
+import traceback
+import re
 from .data_source import servers
 from .publicAPI import get_AccountIdByName
 from .utils import match_keywords
+from nonebot import get_driver
+from nonebot.log import logger
+from httpx import ConnectTimeout
+from asyncio.exceptions import TimeoutError
 
 headers = {
     'Authorization': get_driver().config.api_token
@@ -42,7 +40,7 @@ async def get_BindInfo(user, info):
             return '参数似乎出了问题呢，请使用me或@群友'
         logger.info(f"下面是本次请求的参数，如果遇到了问题，请将这部分连同报错日志一起发送给麻麻哦\n{url}\n{params}")
         async with httpx.AsyncClient(headers=headers) as client:
-            resp = await client.get(url, params=params, timeout=10)
+            resp = await client.get(url, params=params, timeout=None)
             result = resp.json()
             logger.info(f"本次请求返回的状态码:{result['code']}")
         if result['code'] == 200 and result['message'] == "success":
@@ -79,17 +77,15 @@ async def set_BindInfo(user, info):
                 param_server, info = await match_keywords(info, servers)
                 if param_server:
                     param_accountid = await get_AccountIdByName(param_server, str(info[0]))
-                    if param_accountid and param_accountid != 404:
+                    if isinstance(param_accountid, int):
                         url = 'https://api.wows.linxun.link/api/wows/bind/account/platform/bind/put'
                         params = {
                             "platformType": "QQ",
                             "platformId": str(user),
                             "accountId": param_accountid
                         }
-                    elif param_accountid == 404:
-                        return '无法查询该游戏昵称Orz，请检查昵称是否存在'
                     else:
-                        return '发生了错误，有可能是网络波动，请稍后再试'
+                        return f"{param_accountid}"
                 else:
                     return '服务器参数似乎输错了呢'
             else:
@@ -98,7 +94,7 @@ async def set_BindInfo(user, info):
             return '参数似乎输错了呢，请确保后面跟随服务器+游戏昵称'
         logger.info(f"下面是本次请求的参数，如果遇到了问题，请将这部分连同报错日志一起发送给麻麻哦\n{url}\n{params}")
         async with httpx.AsyncClient(headers=headers) as client:
-            resp = await client.get(url, params=params, timeout=20)
+            resp = await client.get(url, params=params, timeout=None)
             result = resp.json()
             logger.info(f"本次请求返回的状态码:{result['code']}")
         if result['code'] == 200 and result['message'] == "success":
@@ -127,7 +123,7 @@ async def change_BindInfo(user, info):
             return '参数似乎出了问题呢，请跟随要切换的序号'
         logger.info(f"下面是本次请求的参数，如果遇到了问题，请将这部分连同报错日志一起发送给麻麻哦\n{url}\n{params}")
         async with httpx.AsyncClient(headers=headers) as client:
-            resp = await client.get(url, params=params, timeout=10)
+            resp = await client.get(url, params=params, timeout=None)
             result = resp.json()
             logger.info(f"本次请求返回的状态码:{result['code']}")
         if result['code'] == 200 and result['message'] == "success":
@@ -148,7 +144,7 @@ async def change_BindInfo(user, info):
         else:
             return f"{result['message']}"
         async with httpx.AsyncClient(headers=headers) as client:
-            resp = await client.get(url, params=params, timeout=10)
+            resp = await client.get(url, params=params, timeout=None)
             result = resp.json()
         if result['code'] == 200 and result['message'] == "success":
             return f'切换绑定成功,当前绑定账号{param_server}：{account_name}'
@@ -190,7 +186,7 @@ async def set_special_BindInfo(user, info):
             return '参数似乎输错了呢，请确保后面跟随服务器+游戏昵称'
         logger.info(f"下面是本次请求的参数，如果遇到了问题，请将这部分连同报错日志一起发送给麻麻哦\n{url}\n{params}")
         async with httpx.AsyncClient(headers=headers) as client:
-            resp = await client.get(url, params=params, timeout=20)
+            resp = await client.get(url, params=params, timeout=None)
             result = resp.json()
             logger.info(f"本次请求返回的状态码:{result['code']}")
         if result['code'] == 200 and result['message'] == "success":
@@ -218,7 +214,7 @@ async def delete_BindInfo(user, info):
         else:
             return '参数似乎出了问题呢，请跟随要切换的序号'
         async with httpx.AsyncClient(headers=headers) as client:
-            resp = await client.get(url, params=params, timeout=10)
+            resp = await client.get(url, params=params, timeout=None)
             result = resp.json()
         if result['code'] == 200 and result['message'] == "success":
             if result['data'] and len(result['data']) >= int(info[0]):
@@ -239,7 +235,7 @@ async def delete_BindInfo(user, info):
             return f"{result['message']}"
         logger.info(f"下面是本次请求的参数，如果遇到了问题，请将这部分连同报错日志一起发送给麻麻哦\n{url}\n{params}")
         async with httpx.AsyncClient(headers=headers) as client:
-            resp = await client.get(url, params=params, timeout=10)
+            resp = await client.get(url, params=params, timeout=None)
             result = resp.json()
             logger.info(f"本次请求返回的状态码:{result['code']}")
         if result['code'] == 200 and result['message'] == "success":

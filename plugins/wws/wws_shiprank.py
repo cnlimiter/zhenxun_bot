@@ -1,21 +1,19 @@
-import asyncio
-import traceback
-from asyncio.exceptions import TimeoutError
-from pathlib import Path
-
 import httpx
+import traceback
 import jinja2
-from bs4 import BeautifulSoup
-from httpx import ConnectTimeout
-from nonebot import get_driver
+import asyncio
+from pathlib import Path
 from nonebot.adapters.onebot.v11 import MessageSegment
-from nonebot.log import logger
-from nonebot_plugin_htmlrender import html_to_pic, text_to_pic
-
-from .data_source import servers, tiers, number_url_homes, set_ShipRank_Numbers
-from .publicAPI import get_ship_byName
+from .data_source import servers, set_shipparams, tiers, number_url_homes, set_ShipRank_Numbers
 from .utils import match_keywords
+from nonebot_plugin_htmlrender import html_to_pic, text_to_pic
 from .wws_ship import ShipSecletProcess, ShipSlectState
+from .publicAPI import get_ship_byName
+from bs4 import BeautifulSoup
+from nonebot import get_driver
+from nonebot.log import logger
+from httpx import ConnectTimeout
+from asyncio.exceptions import TimeoutError
 
 dir_path = Path(__file__).parent
 template_path = dir_path / "template"
@@ -56,11 +54,16 @@ async def get_ShipRank(qqid, info, bot):
                 ShipSecletProcess[qqid] = ShipSlectState(False, None, shipList)
                 img = await text_to_pic(text=msg, css_path=str(template_path / "text-ship.css"), width=250)
                 await bot.send(MessageSegment.image(img))
-                await asyncio.sleep(20)
+                a = 0
+                while a < 40 and not ShipSecletProcess[qqid].state:
+                    a += 1
+                    await asyncio.sleep(0.5)
                 if ShipSecletProcess[qqid].state and ShipSecletProcess[qqid].SlectIndex <= len(shipList):
                     select_shipId = int(shipList[ShipSecletProcess[qqid].SlectIndex - 1][0])
                     number_url += f"{select_shipId},{shipList[ShipSecletProcess[qqid].SlectIndex - 1][2]}"
+                    ShipSecletProcess[qqid] = ShipSlectState(False, None, None)
                 else:
+                    ShipSecletProcess[qqid] = ShipSlectState(False, None, None)
                     return '已超时退出'
         else:
             return '找不到船'
@@ -92,7 +95,7 @@ async def search_ShipRank_Yuyuko(shipId, server):
                 "shipId": int(shipId)
             }
             logger.info(f"下面是本次请求的参数，如果遇到了问题，请将这部分连同报错日志一起发送给麻麻哦\n{url}\n{params}")
-            resp = await client.get(url, params=params, timeout=20)
+            resp = await client.get(url, params=params, timeout=None)
             result = resp.json()
             logger.info(f"本次请求返回的状态码:{result['code']}")
             if result['code'] == 200 and result['data']:
@@ -115,7 +118,7 @@ async def search_ShipRank_Numbers(url, server, shipId):
         content = None
         logger.info(f"下面是本次请求的参数，如果遇到了问题，请将这部分连同报错日志一起发送给麻麻哦\n{url}")
         async with httpx.AsyncClient() as client:
-            resp = await client.get(url, timeout=20)
+            resp = await client.get(url, timeout=None)
             logger.info(f"下面是本次请求返回的状态码，如果遇到了问题，请将这部分连同报错日志一起发送给麻麻哦\n{resp.status_code}")
         soup = BeautifulSoup(resp.content, 'html.parser')
         data = soup.select('tr[class="cells-middle"]')
@@ -136,7 +139,7 @@ async def post_ShipRank(data):
     try:
         async with httpx.AsyncClient(headers=headers) as client:
             url = 'https://api.wows.linxun.link/upload/numbers/data/v2/upload/ship/rank'
-            resp = await client.post(url, json=data, timeout=20)
+            resp = await client.post(url, json=data, timeout=None)
             result = resp.json()
             logger.info(result)
     except (TimeoutError, ConnectTimeout):

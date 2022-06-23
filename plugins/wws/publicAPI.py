@@ -1,14 +1,12 @@
-import traceback
-from asyncio.exceptions import TimeoutError
 from typing import List
-
 import httpx
-from httpx import ConnectTimeout
-from nonebot import get_driver
-from nonebot.log import logger
-
+import traceback
 from .data_source import nations, shiptypes, levels
 from .utils import match_keywords
+from nonebot import get_driver
+from nonebot.log import logger
+from httpx import ConnectTimeout
+from asyncio.exceptions import TimeoutError
 
 headers = {
     'Authorization': get_driver().config.api_token
@@ -20,7 +18,7 @@ async def get_nation_list():
         msg = ''
         url = 'https://api.wows.linxun.link/public/wows/encyclopedia/nation/list'
         async with httpx.AsyncClient(headers=headers) as client:
-            resp = await client.get(url, timeout=10)
+            resp = await client.get(url, timeout=None)
             result = resp.json()
         for nation in result['data']:
             msg: str = msg + f"{nation['cn']}：{nation['nation']}\n"
@@ -52,7 +50,7 @@ async def get_ship_name(infolist: List):
         url = 'https://api.wows.linxun.link/public/wows/encyclopedia/ship/search'
         logger.info(f"下面是本次请求的参数，如果遇到了问题，请将这部分连同报错日志一起发送给麻麻哦\n{url}\n{params}")
         async with httpx.AsyncClient(headers=headers) as client:
-            resp = await client.get(url, params=params, timeout=10)
+            resp = await client.get(url, params=params, timeout=None)
             logger.info(f"本次请求返回的状态码:{resp.status_code}")
             result = resp.json()
         if result['data']:
@@ -79,7 +77,7 @@ async def get_ship_byName(shipname: str):
         }
         logger.info(f"下面是本次请求的参数，如果遇到了问题，请将这部分连同报错日志一起发送给麻麻哦\n{url}\n{params}")
         async with httpx.AsyncClient(headers=headers) as client:
-            resp = await client.get(url, params=params, timeout=10)
+            resp = await client.get(url, params=params, timeout=None)
             logger.info(f"本次请求返回的状态码:{resp.status_code}")
             result = resp.json()
         List = []
@@ -105,21 +103,19 @@ async def get_AccountIdByName(server: str, name: str):
         }
         logger.info(f"下面是本次请求的参数，如果遇到了问题，请将这部分连同报错日志一起发送给麻麻哦\n{url}\n{params}")
         async with httpx.AsyncClient(headers=headers) as client:
-            resp = await client.get(url, params=params, timeout=20)
+            resp = await client.get(url, params=params, timeout=None)
             logger.info(f"本次请求返回的状态码:{resp.status_code}")
             result = resp.json()
         if result['code'] == 200 and result['data']:
             return result['data']['accountId']
-        elif result['code'] == 404:
-            return 404
         else:
-            return None
+            return result['message']
     except (TimeoutError, ConnectTimeout):
         logger.warning(traceback.format_exc())
-        return None
+        return '请求超时了，请过一会儿重试哦~'
     except Exception:
         logger.error(traceback.format_exc())
-        return None
+        return '好像出了点问题呢，可能是网络问题，如果重试几次还不行的话，请联系麻麻解决'
 
 
 async def get_ClanIdByName(server: str, name: str):
@@ -131,7 +127,7 @@ async def get_ClanIdByName(server: str, name: str):
         }
         logger.info(f"下面是本次请求的参数，如果遇到了问题，请将这部分连同报错日志一起发送给麻麻哦\n{params}")
         async with httpx.AsyncClient(headers=headers) as client:
-            resp = await client.get(url, params=params, timeout=20)
+            resp = await client.get(url, params=params, timeout=None)
             result = resp.json()
         List = []
         if result['code'] == 200 and result['data']:

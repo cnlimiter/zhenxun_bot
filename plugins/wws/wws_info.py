@@ -1,19 +1,17 @@
-import re
-import traceback
-from asyncio.exceptions import TimeoutError
-from pathlib import Path
 from typing import List
-
 import httpx
+import traceback
 import jinja2
-from httpx import ConnectTimeout
+import re
+from pathlib import Path
+from .data_source import servers, set_infoparams
+from .utils import match_keywords
+from .publicAPI import get_AccountIdByName
+from nonebot_plugin_htmlrender import html_to_pic
 from nonebot import get_driver
 from nonebot.log import logger
-from nonebot_plugin_htmlrender import html_to_pic
-
-from .data_source import servers, set_infoparams
-from .publicAPI import get_AccountIdByName
-from .utils import match_keywords
+from httpx import ConnectTimeout
+from asyncio.exceptions import TimeoutError
 
 dir_path = Path(__file__).parent
 template_path = dir_path / "template"
@@ -50,16 +48,14 @@ async def get_AccountInfo(qqid, info):
                 param_server, info = await match_keywords(info, servers)
                 if param_server:
                     param_accountid = await get_AccountIdByName(param_server, str(info[0]))
-                    if param_accountid and param_accountid != 404:
+                    if isinstance(param_accountid, int):
                         url = 'https://api.wows.linxun.link/public/wows/account/v2/user/info'
                         params = {
                             "server": param_server,
                             "accountId": param_accountid
                         }
-                    elif param_accountid == 404:
-                        return '无法查询该游戏昵称Orz，请检查昵称是否存在'
                     else:
-                        return '发生了错误，有可能是网络波动，请稍后再试'
+                        return f"{param_accountid}"
                 else:
                     return '服务器参数似乎输错了呢'
             elif params:
@@ -70,7 +66,7 @@ async def get_AccountInfo(qqid, info):
             return '参数似乎出了问题呢'
         logger.info(f"下面是本次请求的参数，如果遇到了问题，请将这部分连同报错日志一起发送给麻麻哦\n{url}\n{params}")
         async with httpx.AsyncClient(headers=headers) as client:
-            resp = await client.get(url, params=params, timeout=20)
+            resp = await client.get(url, params=params, timeout=None)
             result = resp.json()
             logger.info(f"本次请求返回的状态码:{result['code']}")
             logger.info(f"本次请求服务器计算时间:{result['queryTime']}")

@@ -1,22 +1,20 @@
-import asyncio
-import re
-import traceback
-from asyncio.exceptions import TimeoutError
-from collections import defaultdict, namedtuple
-from pathlib import Path
 from typing import List
-
 import httpx
+import traceback
 import jinja2
-from httpx import ConnectTimeout
-from nonebot import get_driver
-from nonebot.adapters.onebot.v11 import MessageSegment, ActionFailed
-from nonebot.log import logger
-from nonebot_plugin_htmlrender import html_to_pic, text_to_pic
-
-from .data_source import servers, set_shipparams
-from .publicAPI import get_ClanIdByName
+import re
+import asyncio
+from pathlib import Path
+from .data_source import servers,set_shipparams
 from .utils import match_keywords
+from nonebot_plugin_htmlrender import html_to_pic,text_to_pic
+from nonebot.adapters.onebot.v11 import MessageSegment,ActionFailed
+from.publicAPI import get_ClanIdByName
+from collections import defaultdict, namedtuple
+from nonebot import get_driver
+from nonebot.log import logger
+from httpx import ConnectTimeout
+from asyncio.exceptions import TimeoutError
 
 dir_path = Path(__file__).parent
 template_path = dir_path / "template"
@@ -28,37 +26,36 @@ headers = {
     'Authorization': get_driver().config.api_token
 }
 
-ClanSlectState = namedtuple("ClanSlectState", ['state', 'SlectIndex', 'SelectList'])
+ClanSlectState = namedtuple("ClanSlectState", ['state','SlectIndex','SelectList'])
 ClanSecletProcess = defaultdict(lambda: ClanSlectState(False, None, None))
 
-
-async def get_ClanInfo(qqid, info, bot):
+async def get_ClanInfo(qqid,info,bot):
     try:
         params = None
-        if isinstance(info, List):
-            for flag, i in enumerate(info):  # 是否包含me或@，包含则调用平台接口
+        if isinstance(info,List):
+            for flag,i in enumerate(info):              #是否包含me或@，包含则调用平台接口
                 if i == 'me':
                     url = ''
                     params = {
-                        "server": "QQ",
-                        "clanId": qqid,
+                    "server": "QQ",
+                    "clanId": qqid,
                     }
                     info.remove("me")
-                match = re.search(r"CQ:at,qq=(\d+)", i)
+                match = re.search(r"CQ:at,qq=(\d+)",i)
                 if match:
                     url = ''
                     params = {
-                        "server": "QQ",
-                        "clanId": match.group(1),
+                    "server": "QQ",
+                    "clanId": match.group(1),
                     }
-                    info[flag] = str(i).replace(f"[{match.group(0)}]", '')
+                    info[flag] = str(i).replace(f"[{match.group(0)}]",'')
                     if not info[flag]:
                         info.remove('')
                     break
             if not params and len(info) == 2:
-                param_server, info = await match_keywords(info, servers)
+                param_server,info = await match_keywords(info,servers)
                 if param_server:
-                    clanList = await get_ClanIdByName(param_server, str(info[0]))
+                    clanList = await get_ClanIdByName(param_server,str(info[0])) 
                     if clanList:
                         if len(clanList) < 2:
                             selectClanId = clanList[0][0]
@@ -69,20 +66,20 @@ async def get_ClanInfo(qqid, info, bot):
                                 flag += 1
                                 msg += f"{flag}：{each[1]}\n"
                             ClanSecletProcess[qqid] = ClanSecletProcess(False, None, clanList)
-                            img = await text_to_pic(text=msg, css_path=str(template_path / "text-ship.css"), width=250)
+                            img = await text_to_pic(text=msg,css_path = str(template_path/"text-ship.css"),width=250) 
                             await bot.send(MessageSegment.image(img))
                             await asyncio.sleep(20)
                             if ClanSecletProcess[qqid].state and ClanSecletProcess[qqid].SlectIndex <= len(clanList):
-                                selectClanId = clanList[ClanSecletProcess[qqid].SlectIndex - 1][0]
+                                selectClanId = clanList[ClanSecletProcess[qqid].SlectIndex-1][0]
                             else:
                                 return '已超时退出'
                     else:
                         return '找不到军团'
-                    if selectClanId:
+                    if selectClanId :
                         url = ''
                         params = {
-                            "server": param_server,
-                            "clanId": selectClanId,
+                        "server": param_server,
+                        "clanId": selectClanId,
                         }
                     else:
                         return '发生了错误，有可能是网络波动，请稍后再试'
