@@ -15,3 +15,8 @@ body {
 .main-box {
     padding: 5px;
 }
+
+@font-face {
+    font-family: "Microsoft YaHei UI";
+    src: url("../../../resources/font/msyh.ttf");
+}
