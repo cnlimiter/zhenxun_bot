@@ -19,7 +19,7 @@ from bs4 import BeautifulSoup
 from datetime import datetime
 
 dir_path = Path(__file__).parent
-template_path = dir_path / "template"
+template_path = dir_path / "static"
 env = jinja2.Environment(
     loader=jinja2.FileSystemLoader(template_path), enable_async=True
 )

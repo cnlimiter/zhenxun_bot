@@ -33,7 +33,7 @@ _nlmt = DailyNumberLimiter(_max)
 _flmt = FreqLimiter(3)
 __version__ = '0.3.1'
 dir_path = Path(__file__).parent
-template_path = dir_path / "template"
+template_path = dir_path / "static"
 
 __zx_plugin_name__ = "战舰世界战绩"
 __plugin_usage__ = """
