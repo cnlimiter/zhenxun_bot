@@ -1,4 +1,4 @@
-<div align=center><img width="320" height="320" src="https://raw.githubusercontent.com/HibiKier/zhenxun_bot/main/logo.png"/></div>
+<div align=center><img width="320" height="320" src="https://raw.githubusercontent.com/cnlimiter/zhenxun_bot/main/logo.png"/></div>
 
 ![maven](https://img.shields.io/badge/python-3.9%2B-blue)
 ![maven](https://img.shields.io/badge/nonebot-2.0.0-yellow)
@@ -24,6 +24,11 @@
 
 
 ## 更新
+### 2022/6/24
+* 初始化300英雄查询插件
+
+### 2022/6/23
+* 将[HikariBot](https://github.com/benx1n/HikariBot)集成为插件
 
 ### 2022/6/22
 
