@@ -6,7 +6,7 @@ from pathlib import Path
 from typing import Tuple
 
 dir_path = Path(__file__).parent
-template_path = dir_path / "static"
+template_path = dir_path / "template"
 
 
 @dataclass

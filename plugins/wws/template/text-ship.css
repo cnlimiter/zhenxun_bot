@@ -1,8 +1,8 @@
 body {
     font-family: "Microsoft YaHei UI";
     font-weight: bold;
-    font-size: 20px;
-    line-height: 35px;
+    font-size: 17px;
+    line-height: 22px;
 }
 
 .text {
@@ -14,9 +14,4 @@ body {
 
 .main-box {
     padding: 5px;
-}
-
-@font-face {
-    font-family: "Microsoft YaHei UI";
-    src: url("../../../resources/font/msyh.ttf");
 }
