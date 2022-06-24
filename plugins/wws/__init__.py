@@ -17,7 +17,7 @@ from nonebot_plugin_htmlrender import text_to_pic
 
 from .data_source import command_list
 from .publicAPI import get_nation_list, get_ship_name, get_ship_byName
-from .utils import find_and_replace_keywords, DailyNumberLimiter, FreqLimiter
+from .utils import find_and_replace_keywords, DailyNumberLimiter, FreqLimiter, _gene_help_img
 from .wws_bind import set_BindInfo, get_BindInfo, change_BindInfo, set_special_BindInfo, delete_BindInfo
 from .wws_clan import get_ClanInfo, ClanSecletProcess
 from .wws_info import get_AccountInfo
@@ -164,6 +164,7 @@ async def send_bot_help():
             result = resp.text
         result = f'''帮助列表                                                当前版本{__version__}  最新版本{latest_version}\n{result}'''
         img = await text_to_pic(text=result, css_path=str(template_path / "text-help.css"), width=800)
+        #img = await _gene_help_img(width=600, height=700, text=result)
         return img
     except Exception:
         logger.warning(traceback.format_exc())
@@ -219,23 +220,23 @@ async def check_version():
         return
 
 
-@driver.on_startup
-async def startup():
-    try:
-        loop = asyncio.get_running_loop()
-        url = 'https://benx1n.oss-cn-beijing.aliyuncs.com/template_Hikari/template.json'
-        async with httpx.AsyncClient() as client:
-            resp = await client.get(url, timeout=20)
-            result = resp.json()
-            for each in result:
-                for name, url in each.items():
-                    async with httpx.AsyncClient() as client:
-                        resp = resp = await client.get(url, timeout=20)
-                        with open(template_path / name, "wb+") as file:
-                            file.write(resp.content)
-    except Exception:
-        logger.error(traceback.format_exc())
-        return
+# @driver.on_startup
+# async def startup():
+#     try:
+#         loop = asyncio.get_running_loop()
+#         url = 'https://benx1n.oss-cn-beijing.aliyuncs.com/template_Hikari/template.json'
+#         async with httpx.AsyncClient() as client:
+#             resp = await client.get(url, timeout=20)
+#             result = resp.json()
+#             for each in result:
+#                 for name, url in each.items():
+#                     async with httpx.AsyncClient() as client:
+#                         resp = resp = await client.get(url, timeout=20)
+#                         with open(template_path / name, "wb+") as file:
+#                             file.write(resp.content)
+#     except Exception:
+#         logger.error(traceback.format_exc())
+#         return
 
     # scheduler.add_job(
 
@@ -244,8 +245,8 @@ async def startup():
 #    "cron",
 #    hour=12,
 # )
-scheduler.add_job(
-    startup,
-    "cron",
-    hour=4
-)
+# scheduler.add_job(
+#     startup,
+#     "cron",
+#     hour=4
+# )

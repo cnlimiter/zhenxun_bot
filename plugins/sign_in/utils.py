@@ -1,3 +1,22 @@
+import asyncio
+import os
+import random
+from datetime import datetime
+from io import BytesIO
+from pathlib import Path
+from typing import Optional, List
+
+import nonebot
+from configs.config import Config
+from configs.config import NICKNAME
+from nonebot import Driver
+from nonebot.adapters.onebot.v11 import MessageSegment
+
+from models.group_member_info import GroupInfoUser
+from models.sign_group_user import SignGroupUser
+from utils.image_utils import BuildImage
+from utils.message_builder import image
+from utils.utils import get_user_avatar
 from .config import (
     SIGN_RESOURCE_PATH,
     SIGN_TODAY_CARD_PATH,
@@ -6,28 +25,7 @@ from .config import (
     lik2level,
     lik2relation,
     level2attitude,
-    weekdays,
 )
-from models.sign_group_user import SignGroupUser
-from models.group_member_info import GroupInfoUser
-from nonebot.adapters.onebot.v11 import MessageSegment
-from configs.config import Config
-from utils.utils import get_user_avatar
-from utils.image_utils import BuildImage
-from utils.message_builder import image
-from configs.config import NICKNAME
-from pathlib import Path
-from datetime import datetime
-from typing import Optional, List
-from nonebot import Driver
-from io import BytesIO
-import asyncio
-import random
-import nonebot
-import time
-import locale
-import os
-
 
 driver: Driver = nonebot.get_driver()
 

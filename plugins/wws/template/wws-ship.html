@@ -6,14 +6,9 @@
 </head>
 <style>
 
-    @font-face {
-        font-family: "Microsoft YaHei UI";
-        src: url("../../../resources/font/msyh.ttf");
-    }
-
     body {
         font-size: 26px;
-        font-family: simhei, serif;
+        font-family: "Microsoft YaHei UI";
     }
 
     .font-size {
@@ -55,7 +50,7 @@
 
 </style>
 <body>
-<div>
+   <div>
     <table id="ship-data" width="800" style="table-layout: fixed;">
         <tr>
             <td colspan="6" class="font-data" style="text-align: center;">
@@ -86,7 +81,7 @@
         {% if shipRank %}
         <tr>
             <td colspan="6" style="text-align: center;">排名:{{shipRank}}</td>
-        </tr>
+        </tr>   
         {% endif %}
         <tr>
             <td colspan="6" style="text-align: center;">最后战斗时间</td>
