@@ -1,4 +1,4 @@
-<div align=center><img width="320" height="320" src="https://raw.githubusercontent.com/cnlimiter/zhenxun_bot/main/logo.png"/></div>
+<div align=center><a href="https://github.com/cnlimiter/zhenxun_bot"><img width="320" height="320" src="https://pan.evolvefield.cn/2022/06/25/62b64d654e83c.png"/></a></div>
 
 ![maven](https://img.shields.io/badge/python-3.9%2B-blue)
 ![maven](https://img.shields.io/badge/nonebot-2.0.0-yellow)
