@@ -52,29 +52,92 @@
     <div>
         <table id="role-data" width="920" style="table-layout: fixed;">
             <tr>
-                <td colspan="6" class="font-data">
+                <td colspan="9" class="font-data">
                     &nbsp;&nbsp;&nbsp;&nbsp;<span
-                        style="text-align: center;color: #A00DC5;font-size : 35px;">[均摘星]</span>
+                        style="text-align: center;color: #A00DC5;font-size : 35px;">[{{RoleName}}]</span>
+                        <sup style="color:green">{{MasterLv}}</sup>
                 </td>
             </tr>
             <tr>
-                <td colspan="6" class="font-data">
-                    <span>被酒莫惊春睡重，赌书消得泼茶香，当时只道是寻常。</span>
+                <td colspan="8" class="font-data " style="text-align: center;font-size : 20px;;">
+                    <span>sbty</span>
 
                 </td>
             </tr>
 
-
-
-
+            <tr>
+                <td colspan="8" class="bold-data greyColor" style="text-align: center;font-size : 35px;;">竞技场</td>
+            </tr>
 
             <tr>
-                <td colspan="6" class="font-data greyColor" style="text-align: center;">
+                <td colspan="2" class="greyColor2 font-size">总场次</td>
+                <td colspan="2" class="greyColor2 font-size">获胜数</td>
+                <td colspan="2" class="greyColor2 font-size">胜率</td>
+                <td colspan="2" class="greyColor2 font-size">团分</td>
+            </tr>
+            <tr>
+                <td colspan="2" class="blueColor font-size">{{JJCTotal}}</td>
+                <td colspan="2" class="blueColor font-size" style="color: {{winsColor}}">{{JJCWin}}</td>
+                <td colspan="2" class="blueColor font-size" style="color: {{damageColor}}">{{JJCPercent}}%</td>
+                <td colspan="2" class="blueColor font-size" style="color: {{damageColor}}">{{TeamScore}}</td>
+            </tr>
+            <tr>
+                <td colspan="5"></td>
+            </tr>
+            <tr>
+                <td rowspan="5" class="bold-data greyColor" style="text-align: center;">本命英雄</td>
+            </tr>
+            <tr>
+                <td colspan="1" class="greyColor2 font-size">排名</td>
+                <td colspan="2" class="greyColor2 font-size">英雄</td>
+                <td colspan="1" class="greyColor2 font-size">胜场</td>
+                <td colspan="2" class="greyColor2 font-size">胜率</td>
+            </tr>
+            <tr>
+                <td colspan="1" class="blueColor font-size">1</td>
+                <td colspan="2" class="blueColor font-size">{{1HeroName}}</td>
+                <td colspan="1" class="blueColor font-size" style="color: {{winsColor}}">{{1HeroWin}}</td>
+                <td colspan="2" class="blueColor font-size" style="color: {{damageColor}}">{{1HeroPercent}}%</td>
+            </tr>
+            <tr>
+                <td colspan="1" class="blueColor font-size">2</td>
+                <td colspan="2" class="blueColor font-size">{{2HeroName}}</td>
+                <td colspan="1" class="blueColor font-size" style="color: {{winsColor}}">{{2HeroWin}}</td>
+                <td colspan="2" class="blueColor font-size" style="color: {{damageColor}}">{{2HeroPercent}}%</td>
+            </tr>
+            <tr>
+                <td colspan="1" class="blueColor font-size">3</td>
+                <td colspan="2" class="blueColor font-size">{{3HeroName}}</td>
+                <td colspan="1" class="blueColor font-size" style="color: {{winsColor}}">{{3HeroWin}}</td>
+                <td colspan="2" class="blueColor font-size" style="color: {{damageColor}}">{{3HeroPercent}}%</td>
+            </tr>
+            <tr>
+                <td colspan="9" class="blackColor" style="text-align: center;"></td>
+            </tr>
+            <tr>
+                <td colspan="2">
+                    <div id="heros" style="width: 200px;height:200px;"></div>
+                </td>
+                <td colspan="2">
+                    <div id="skins" style="width: 200px;height:200px;"></div>
+                </td>
+                <td colspan="2">
+
+                    <div id="100win" style="width: 200px;height:200px;"></div>
+                </td>
+                <td colspan="2">
+
+                    <div id="300win" style="width: 200px;height:200px;"></div>
+                </td>
+            </tr>
+
+            <tr>
+                <td colspan="8" class="font-data greyColor" style="text-align: center;">
                     <span>© 演变</span>
                 </td>
             </tr>
             <tr>
-                <td colspan="6" class="font-data greyColor" style="text-align: center;">
+                <td colspan="8" class="font-data greyColor" style="text-align: center;">
                     <span>https://github.com/cnlimiter/300hero_info</span>
                 </td>
             </tr>
@@ -83,6 +146,193 @@
 
 
     </div>
+    <script src="https://cdn.jsdelivr.net/npm/echarts@5.3.3/dist/echarts.js"></script>
+    <script>
 
+        var jsonObj = {
+            name: ["已获得", "未获得"],
+            value: [10, 10]
+        };
+
+        var myChart = echarts.init(document.getElementById('heros'));
+        var myChart1 = echarts.init(document.getElementById('skins'));
+        var myChart2 = echarts.init(document.getElementById('100win'));
+        var myChart3 = echarts.init(document.getElementById('300win'));
+
+        myChart.setOption({
+            title: {
+                text: this.title
+            },
+            color: ["#7ba3a8", "#33CCFF"],
+            series: [
+                {
+                    name: this.title,
+                    type: 'pie',
+                    selectedMode: 'single',
+                    radius: ['40%', '92%'],
+                    clockwise: true,
+                    itemStyle: {
+                        borderWidth: 5,
+                        borderColor: '#fff'
+                    },
+                    label: {
+                        position: 'inside',
+                        formatter: '{b}:\n {c}\n({d}%)',
+                        fontSize: 15, //文字大小
+                        fontWeight: 'bold',
+                    },
+                    data: jsonObj
+                }
+            ],
+            graphic: { // 添加原生图形元素组件
+                elements: [{
+                    type: 'text', // 组件类型
+                    left: 'center', //定位
+                    top: 'center', // 定位
+                    style: { // 样式
+                        text: '拥有\n英雄', //文字
+                        fontSize: 22, //文字大小
+                        textAlign: 'center', //定位
+                        width: 30,
+                        height: 30,
+                        fill: 'darkgray' // 字体颜色
+                    }
+                }]
+            }
+        })
+
+        myChart1.setOption({
+            title: {
+                text: this.title
+            },
+            color: ["#7ba3a8", "#f35a4a"],
+            series: [
+                {
+                    name: this.title,
+                    type: 'pie',
+                    selectedMode: 'single',
+                    radius: ['40%', '92%'],
+                    clockwise: true,
+                    itemStyle: {
+                        borderWidth: 5,
+                        borderColor: '#fff'
+                    },
+                    label: {
+                        position: 'inside',
+                        formatter: '{b}: \n {c} \n ({d}%)',
+                        fontSize: 15, //文字大小
+                        fontWeight: 'bold',
+                    },
+                    data: [
+                        { value: 1400, name: '未获得' },
+                        { value: 2700, name: '已获得' },
+                    ]
+                }
+            ],
+            graphic: { // 添加原生图形元素组件
+                elements: [{
+                    type: 'text', // 组件类型
+                    left: 'center', //定位
+                    top: 'center', // 定位
+                    style: { // 样式
+                        text: '英雄\n皮肤', //文字
+                        fontSize: 22, //文字大小
+                        textAlign: 'center', //定位
+                        width: 30,
+                        height: 30,
+                        fill: 'darkgray' // 字体颜色
+                    }
+                }]
+            }
+        })
+        myChart2.setOption({
+            title: {
+                text: this.title
+            },
+            color: ["#7ba3a8", "#b50dc5"],
+            series: [
+                {
+                    name: this.title,
+                    type: 'pie',
+                    selectedMode: 'single',
+                    radius: ['40%', '92%'],
+                    clockwise: true,
+                    itemStyle: {
+                        borderWidth: 5,
+                        borderColor: '#fff'
+                    },
+                    label: {
+                        position: 'inside',
+                        formatter: '{b}: \n {c} \n ({d}%)',
+                        fontSize: 15, //文字大小
+                        fontWeight: 'bold',
+                    },
+                    data: [
+                        { value: 1400, name: '未获得' },
+                        { value: 2700, name: '已获得' },
+                    ]
+                }
+            ],
+            graphic: { // 添加原生图形元素组件
+                elements: [{
+                    type: 'text', // 组件类型
+                    left: 'center', //定位
+                    top: 'center', // 定位
+                    style: { // 样式
+                        text: '100胜\n称号', //文字
+                        fontSize: 22, //文字大小
+                        textAlign: 'center', //定位
+                        width: 30,
+                        height: 30,
+                        fill: 'darkgray' // 字体颜色
+                    }
+                }]
+            }
+        })
+        myChart3.setOption({
+            title: {
+                text: this.title
+            },
+            color: ["#7ba3a8", "#008000"],
+            series: [
+                {
+                    name: this.title,
+                    type: 'pie',
+                    selectedMode: 'single',
+                    radius: ['40%', '92%'],
+                    clockwise: true,
+                    itemStyle: {
+                        borderWidth: 5,
+                        borderColor: '#fff'
+                    },
+                    label: {
+                        position: 'inside',
+                        formatter: '{b}:\n {c}\n({d}%)',
+                        fontSize: 15, //文字大小
+                        fontWeight: 'bold',
+                    },
+                    data: [
+                        { value: 1400, name: '未获得' },
+                        { value: 2700, name: '已获得' },
+                    ]
+                }
+            ],
+            graphic: { // 添加原生图形元素组件
+                elements: [{
+                    type: 'text', // 组件类型
+                    left: 'center', //定位
+                    top: 'center', // 定位
+                    style: { // 样式
+                        text: '300胜\n称号', //文字
+                        fontSize: 22, //文字大小
+                        textAlign: 'center', //定位
+                        width: 30,
+                        height: 30,
+                        fill: 'darkgray' // 字体颜色
+                    }
+                }]
+            }
+        })
+    </script>
 </body>
 </html>

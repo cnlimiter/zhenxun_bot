@@ -15,12 +15,12 @@ env = jinja2.Environment(
 )
 
 
-async def get_RoleInfo(name):
+async def get_RoleInfo(token: str, name):
     try:
         url, params = '', ''
         url = 'https://m300wxapp.jumpw.com/battle/searchNormal?type=wx'
         params = {
-            "token": "QQ",
+            "token": token,
             "RoleName": str(name)
         }
         async with httpx.AsyncClient() as client:
