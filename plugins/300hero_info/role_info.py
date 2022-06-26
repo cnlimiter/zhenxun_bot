@@ -15,13 +15,12 @@ env = jinja2.Environment(
 )
 
 
-async def get_RoleInfo(name):
+async def get_RoleInfo(token: str, name: str):
     try:
-        url, params = '', ''
         url = 'https://m300wxapp.jumpw.com/battle/searchNormal?type=wx'
         params = {
-            "token": "QQ",
-            "RoleName": str(name)
+            "token": token,
+            "RoleName": name
         }
         async with httpx.AsyncClient() as client:
             resp = await client.get(url, params=params, timeout=None)
@@ -41,4 +40,4 @@ async def get_RoleInfo(name):
         return '请求超时了，请过会儿再尝试哦~'
     except Exception:
         logger.error(traceback.format_exc())
-        return '出了点问题，请联系真寻的主人解决'
+        return '出了点问题，请联系真寻主人解决的说'

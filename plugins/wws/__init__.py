@@ -164,7 +164,6 @@ async def send_bot_help():
             result = resp.text
         result = f'''帮助列表                                                当前版本{__version__}  最新版本{latest_version}\n{result}'''
         img = await text_to_pic(text=result, css_path=str(template_path / "text-help.css"), width=800)
-        #img = await _gene_help_img(width=600, height=700, text=result)
         return img
     except Exception:
         logger.warning(traceback.format_exc())
