@@ -27,15 +27,15 @@ from .model import GitHubSub
 __zx_plugin_name__ = "github订阅"
 __plugin_usage__ = """
 usage：
-    github新Comment，PR，Issue等提醒
+    github新Commit，PR，Issue等提醒
     指令：
         添加github ['用户'/'仓库'] [用户名/{owner/repo}]
         删除github [用户名/{owner/repo}]
         查看github
-        示例：添加github订阅用户 HibiKier
-        示例：添加gb订阅仓库 HibiKier/zhenxun_bot
-        示例：添加github用户 yajiwa
-        示例：删除gb订阅 yajiwa
+        示例：添加github订阅用户 cnlimiter
+        示例：添加gb订阅仓库 cnlimiter/zhenxun_bot
+        示例：添加github用户 cnlimiter
+        示例：删除gb订阅 cnlimiter
 """.strip()
 __plugin_des__ = "github订阅推送"
 __plugin_cmd__ = ["添加github ['用户'/'仓库'] [用户名/{owner/repo}]", "删除github [用户名/{owner/repo}]", "查看github"]
