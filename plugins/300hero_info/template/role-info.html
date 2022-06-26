@@ -49,465 +49,357 @@
 </style>
 
 <body>
-    <div>
-        <table id="role-data" width="920" style="table-layout: fixed;">
-            <tr>
-                <td colspan="9" class="font-data">
-                    &nbsp;&nbsp;&nbsp;&nbsp;<span
-                        style="text-align: center;color: #A00DC5;font-size : 35px;">[{{RoleName}}]</span>
-                        <sup style="color:green">{{MasterLv}}</sup>
-                </td>
-            </tr>
-            <tr>
-                <td colspan="8" class="font-data " style="text-align: center;font-size : 20px;;">
-                    <span>sbty</span>
+<div>
+    <table id="role-data" width="920" style="table-layout: fixed;">
+        <tr>
+            <td colspan="9" class="font-data">
+                <span style="text-align: center;color: #A00DC5;font-size : 35px;">[{{RoleName}}]</span>
+                <span style="text-align: center;color: #f27377;font-size : 30px;">({{MasterLv}}级)</span>
+                <sup style="color:green">VIP:{{VipLv}}</sup>
+            </td>
+        </tr>
+        <tr>
+            <td colspan="8" class="font-data " style="text-align: center;font-size : 20px;;">
+                <span>sbty</span>
 
-                </td>
-            </tr>
+            </td>
+        </tr>
 
-            <tr>
-                <td colspan="8" class="bold-data greyColor" style="text-align: center;font-size : 35px;;">竞技场</td>
-            </tr>
+        <tr>
+            <td colspan="8" class="bold-data greyColor" style="text-align: center;font-size : 35px;;">竞技场</td>
+        </tr>
 
-            <tr>
-                <td colspan="2" class="greyColor2 font-size">总场次</td>
-                <td colspan="2" class="greyColor2 font-size">获胜数</td>
-                <td colspan="2" class="greyColor2 font-size">胜率</td>
-                <td colspan="2" class="greyColor2 font-size">团分</td>
-            </tr>
-            <tr>
-                <td colspan="2" class="blueColor font-size">{{JJCTotal}}</td>
-                <td colspan="2" class="blueColor font-size">{{JJCWin}}</td>
-                <td colspan="2" class="blueColor font-size">{{JJCPercent}}%</td>
-                <td colspan="2" class="blueColor font-size">{{TeamScore}}</td>
-            </tr>
-            <tr>
-                <td colspan="5"></td>
-            </tr>
-            <tr>
-                <td rowspan="5" class="bold-data greyColor" style="text-align: center;">本命英雄</td>
-            </tr>
-            <tr>
-                <td colspan="1" class="greyColor2 font-size">排名</td>
-                <td colspan="2" class="greyColor2 font-size">英雄</td>
-                <td colspan="1" class="greyColor2 font-size">胜场</td>
-                <td colspan="2" class="greyColor2 font-size">胜率</td>
-            </tr>
-            <tr>
-                <td colspan="1" class="blueColor font-size">1</td>
-                <td colspan="2" class="blueColor font-size">{{HeroName1}}</td>
-                <td colspan="1" class="blueColor font-size">{{HeroWin1}}</td>
-                <td colspan="2" class="blueColor font-size">{{HeroPercent1}}%</td>
-            </tr>
-            <tr>
-                <td colspan="1" class="blueColor font-size">2</td>
-                <td colspan="2" class="blueColor font-size">{{HeroName2}}</td>
-                <td colspan="1" class="blueColor font-size">{{HeroWin2}}</td>
-                <td colspan="2" class="blueColor font-size">{{HeroPercent2}}%</td>
-            </tr>
-            <tr>
-                <td colspan="1" class="blueColor font-size">3</td>
-                <td colspan="2" class="blueColor font-size">{{HeroName3}}</td>
-                <td colspan="1" class="blueColor font-size">{{HeroWin3}}</td>
-                <td colspan="2" class="blueColor font-size">{{HeroPercent3}}%</td>
-            </tr>
-            <tr>
-                <td colspan="9" class="blackColor" style="text-align: center;"></td>
-            </tr>
-<!--            <tr>-->
-<!--                <td colspan="2">-->
-<!--                    <div id="heros" style="width: 200px;height:200px;"></div>-->
-<!--                </td>-->
-<!--                <td colspan="2">-->
-<!--                    <div id="skins" style="width: 200px;height:200px;"></div>-->
-<!--                </td>-->
-<!--                <td colspan="2">-->
+        <tr>
+            <td colspan="2" class="greyColor2 font-size">总场次</td>
+            <td colspan="2" class="greyColor2 font-size">获胜数</td>
+            <td colspan="2" class="greyColor2 font-size">胜率</td>
+            <td colspan="2" class="greyColor2 font-size">团分</td>
+        </tr>
+        <tr>
+            <td colspan="2" class="blueColor font-size">{{JJCTotal}}场</td>
+            <td colspan="2" class="blueColor font-size">{{JJCWin}}次</td>
+            <td colspan="2" class="blueColor font-size">{{JJCPercent}}%</td>
+            <td colspan="2" class="blueColor font-size">{{TeamScore}}分</td>
+        </tr>
+        <tr>
+            <td colspan="5"></td>
+        </tr>
+        <tr>
+            <td rowspan="5" class="bold-data greyColor" style="text-align: center;">本命英雄</td>
+        </tr>
+        <tr>
+            <td colspan="1" class="greyColor2 font-size">排名</td>
+            <td colspan="2" class="greyColor2 font-size">英雄</td>
+            <td colspan="1" class="greyColor2 font-size">场次</td>
+            <td colspan="1" class="greyColor2 font-size">胜场</td>
+            <td colspan="2" class="greyColor2 font-size">胜率</td>
+        </tr>
+        <tr>
+            <td colspan="1" class="blueColor font-size">1</td>
+            <td colspan="2" class="blueColor font-size">{{HeroName1}}</td>
+            <td colspan="1" class="greyColor2 font-size">{{HeroTotal1}}场</td>
+            <td colspan="1" class="blueColor font-size">{{HeroWin1}}次</td>
+            <td colspan="2" class="blueColor font-size">{{HeroPercent1}}%</td>
+        </tr>
+        <tr>
+            <td colspan="1" class="blueColor font-size">2</td>
+            <td colspan="2" class="blueColor font-size">{{HeroName2}}</td>
+            <td colspan="1" class="greyColor2 font-size">{{HeroTotal2}}场</td>
+            <td colspan="1" class="blueColor font-size">{{HeroWin2}}次</td>
+            <td colspan="2" class="blueColor font-size">{{HeroPercent2}}%</td>
+        </tr>
+        <tr>
+            <td colspan="1" class="blueColor font-size">3</td>
+            <td colspan="2" class="blueColor font-size">{{HeroName3}}</td>
+            <td colspan="1" class="greyColor2 font-size">{{HeroTotal3}}场</td>
+            <td colspan="1" class="blueColor font-size">{{HeroWin3}}次</td>
+            <td colspan="2" class="blueColor font-size">{{HeroPercent3}}%</td>
+        </tr>
+        <tr>
+            <td colspan="9" class="blackColor" style="text-align: center;"></td>
+        </tr>
+        <tr>
+            <td colspan="2">
+                <div id="heros" style="width: 200px;height:200px;"></div>
+            </td>
+            <td colspan="2">
+                <div id="skins" style="width: 200px;height:200px;"></div>
+            </td>
+            <td colspan="2">
 
-<!--                    <div id="100win" style="width: 200px;height:200px;"></div>-->
-<!--                </td>-->
-<!--                <td colspan="2">-->
+                <div id="100win" style="width: 200px;height:200px;"></div>
+            </td>
+            <td colspan="2">
 
-<!--                    <div id="300win" style="width: 200px;height:200px;"></div>-->
-<!--                </td>-->
-<!--            </tr>-->
+                <div id="300win" style="width: 200px;height:200px;"></div>
+            </td>
+        </tr>
 
-            <tr>
-                <td colspan="4">
-                    <div>
-                        <canvas id="myChart" width="200"
-                                height="150"></canvas>
-                    </div>
-                </td>
-                <td colspan="4">
-                    <div>
-                        <canvas id="myChart1" width="200"
-                                height="150"></canvas>
-                    </div>
-                </td>
+        <!--            <tr>-->
+        <!--                <td colspan="4">-->
+        <!--                    <div>-->
+        <!--                        <canvas id="myChart" width="200"-->
+        <!--                                height="150"></canvas>-->
+        <!--                    </div>-->
+        <!--                </td>-->
+        <!--                <td colspan="4">-->
+        <!--                    <div>-->
+        <!--                        <canvas id="myChart1" width="200"-->
+        <!--                                height="150"></canvas>-->
+        <!--                    </div>-->
+        <!--                </td>-->
 
-            </tr>
-            <tr>
-                <td colspan="4">
-                    <div>
-                        <canvas id="myChart2" width="200"
-                                height="150"></canvas>
-                    </div>
-                </td>
-                <td colspan="4">
-                    <div>
-                        <canvas id="myChart3" width="200"
-                                height="150"></canvas>
-                    </div>
-                </td>
-            </tr>
-            <tr>
-                <td colspan="8" class="font-data greyColor" style="text-align: center;">
-                    <span>© 演变</span>
-                </td>
-            </tr>
-            <tr>
-                <td colspan="8" class="font-data greyColor" style="text-align: center;">
-                    <span>https://github.com/cnlimiter/300hero_info</span>
-                </td>
-            </tr>
-        </table>
-        </table>
+        <!--            </tr>-->
+        <!--            <tr>-->
+        <!--                <td colspan="4">-->
+        <!--                    <div>-->
+        <!--                        <canvas id="myChart2" width="200"-->
+        <!--                                height="150"></canvas>-->
+        <!--                    </div>-->
+        <!--                </td>-->
+        <!--                <td colspan="4">-->
+        <!--                    <div>-->
+        <!--                        <canvas id="myChart3" width="200"-->
+        <!--                                height="150"></canvas>-->
+        <!--                    </div>-->
+        <!--                </td>-->
+        <!--            </tr>-->
+        <tr>
+            <td colspan="8" class="font-data greyColor" style="text-align: center;">
+                <span>© 演变</span>
+            </td>
+        </tr>
+        <tr>
+            <td colspan="8" class="font-data greyColor" style="text-align: center;">
+                <span>https://github.com/cnlimiter/300hero_info</span>
+            </td>
+        </tr>
+    </table>
+    </table>
 
 
-    </div>
+</div>
 <!--<script src="https://cdn.jsdelivr.net/npm/echarts@5.3.3/dist/echarts.js"></script>-->
-<script src= "{{template_path}}\Chart.min.js"></script>
-<script src= "{{template_path}}\chartjs-plugin-datalabels@1.0.0.js"></script>
+<script src="{{template_path}}\echarts.js"></script>
+<!--<script src="{{template_path}}\chartjs-plugin-datalabels@1.0.0.js"></script>-->
 <!--<script src="https://benx1n.oss-cn-beijing.aliyuncs.com/template_Hikari/Chart.min.js"></script>-->
 <!--<script src="https://benx1n.oss-cn-beijing.aliyuncs.com/template_Hikari/chartjs-plugin-datalabels@1.0.0.js"></script>-->
 <script>
-        window.onload = function () {
-            drawGraphs();
-        };
-        function drawGraphs() {
-        var ctx = document.getElementById('myChart').getContext('2d');
-        var ctx1 = document.getElementById('myChart1').getContext('2d');
-        var ctx2 = document.getElementById('myChart2').getContext('2d');
-        var ctx3 = document.getElementById('myChart3').getContext('2d');
 
-        Chart.plugins.register(ChartDataLabels);
-        const labels = ["已获得", "未获得"];
-        const data = {
-            labels: labels,
-            datasets: [{
-                label: '个数',
-                data: [{{HaveHeros}}, {{NoHeros}}],
-                backgroundColor: [
-                    'rgb(51, 204, 255)',
-                    'rgb(123, 163, 168)'
-                ],
-                borderColor: [
-                    'rgba(54, 162, 235, 0.2)',
-                    'rgba(54, 162, 235, 0.2)'
-                ],
-                borderWidth: 1
-            }]
-        }
-        const data1 = {
-            labels: labels,
-            datasets: [{
-                label: '个数',
-                data: [{{HaveSkins}}, {{NoSkins}}],
-                backgroundColor: [
-                    'rgb(243, 90, 74)',
-                    'rgb(123, 163, 168)'
-                ],
-                borderColor: [
-                    'rgba(54, 162, 235, 0.2)',
-                    'rgba(54, 162, 235, 0.2)'
-                ],
-                borderWidth: 1
-            }]
-        }
-        const data2 = {
-            labels: labels,
-            datasets: [{
-                label: '个数',
-                data: [{{Have100}}, {{No100}}],
-                backgroundColor: [
-                    'rgb(0, 128, 0)',
-                    'rgb(123, 163, 168)'
-                ],
-                borderColor: [
-                    'rgba(54, 162, 235, 0.2)',
-                    'rgba(54, 162, 235, 0.2)'
-                ],
-                borderWidth: 1
-            }]
-        }
-        const data3 = {
-            labels: labels,
-            datasets: [{
-                label: '个数',
-                data: [{{Have300}}, {{No300}}],
-                backgroundColor: [
-                    'rgb(181, 13, 197)',
-                    'rgb(123, 163, 168)'
-                ],
-                borderColor: [
-                    'rgba(54, 162, 235, 0.2)',
-                    'rgba(54, 162, 235, 0.2)'
-                ],
-                borderWidth: 1
-            }]
-        }
-        const config = {
-            type: 'doughnut',
-            data: data,
-            options: {
-                title: {
-                    fontFamily: 'Microsoft YaHei UI',
-                    fontSize: 18,
-                    fontColor: 'black',
-                    display: true,
-                    text: "拥有英雄"
-                }
-            },
-        };
-        const config1 = {
-            type: 'doughnut',
-            data: data1,
-            options: {
-                title: {
-                    fontFamily: 'Microsoft YaHei UI',
-                    fontSize: 18,
-                    fontColor: 'black',
-                    display: true,
-                    text: "拥有皮肤"
-                }
-            },
-        };
-        const config2 = {
-            type: 'doughnut',
-            data: data2,
-            options: {
-                title: {
-                    fontFamily: 'Microsoft YaHei UI',
-                    fontSize: 18,
-                    fontColor: 'black',
-                    display: true,
-                    text: "100胜称号"
-                }
-            },
-        };
-        const config3 = {
-            type: 'doughnut',
-            data: data3,
-            options: {
-                title: {
-                    fontFamily: 'Microsoft YaHei UI',
-                    fontSize: 18,
-                    fontColor: 'black',
-                    display: true,
-                    text: "300胜称号"
-                }
-            },
-        };
-        var myChart = new Chart(
-            ctx,
-            config
-        );
-        var myChart1 = new Chart(
-            ctx1,
-            config1
-        );
-        var myChart2 = new Chart(
-            ctx2,
-            config2
-        );
-        var myChart4 = new Chart(
-            ctx3,
-            config3
-        );
+
+    var havehero = {{HaveHeros}}
+    var nohero = {{NoHeros}}
+    var haveskin = {{HaveSkins}}
+    var noskin = {{NoSkins}}
+    var have100 = {{Have100}}
+    var no100 = {{No100}}
+    var have300 = {{Have300}}
+    var no300 = {{No300}}
+
+    var myChart = echarts.init(document.getElementById('heros'));
+    var myChart1 = echarts.init(document.getElementById('skins'));
+    var myChart2 = echarts.init(document.getElementById('100win'));
+    var myChart3 = echarts.init(document.getElementById('300win'));
+
+    var data1 = {
+        "dataset": [
+            {"value": nohero, "name": "未获得"},
+            {"value": havehero, "name": "已获得"},
+        ]
+    }
+    var data2 = {
+        "dataset": [
+            {"value": noskin, "name": "未获得"},
+            {"value": haveskin, "name": "已获得"},
+        ]
+    }
+    var data3 = {
+        "dataset": [
+            {"value": no100, "name": "未获得"},
+            {"value": have100, "name": "已获得"},
+        ]
+    }
+    var data4 = {
+        "dataset": [
+            {"value": no300, "name": "未获得"},
+            {"value": have300, "name": "已获得"},
+        ]
     }
 
-        // var myChart = echarts.init(document.getElementById('heros'));
-        // var myChart1 = echarts.init(document.getElementById('skins'));
-        // var myChart2 = echarts.init(document.getElementById('100win'));
-        // var myChart3 = echarts.init(document.getElementById('300win'));
 
-        // myChart.setOption({
-        //     title: {
-        //         text: this.title
-        //     },
-        //     color: ["#7ba3a8", "#33CCFF"],
-        //     series: [
-        //         {
-        //             name: this.title,
-        //             type: 'pie',
-        //             selectedMode: 'single',
-        //             radius: ['40%', '92%'],
-        //             clockwise: true,
-        //             itemStyle: {
-        //                 borderWidth: 5,
-        //                 borderColor: '#fff'
-        //             },
-        //             label: {
-        //                 position: 'inside',
-        //                 formatter: '{b}:\n {c}\n({d}%)',
-        //                 fontSize: 15, //文字大小
-        //                 fontWeight: 'bold',
-        //             },
-        //             data: [
-        //                 { value: 1400, name: '未获得' },
-        //                 { value: 2700, name: '已获得' },
-        //             ]
-        //
-        //         }
-        //     ],
-        //     graphic: { // 添加原生图形元素组件
-        //         elements: [{
-        //             type: 'text', // 组件类型
-        //             left: 'center', //定位
-        //             top: 'center', // 定位
-        //             style: { // 样式
-        //                 text: '拥有\n英雄', //文字
-        //                 fontSize: 22, //文字大小
-        //                 textAlign: 'center', //定位
-        //                 width: 30,
-        //                 height: 30,
-        //                 fill: 'darkgray' // 字体颜色
-        //             }
-        //         }]
-        //     }
-        // })
-        // myChart1.setOption({
-        //     title: {
-        //         text: this.title
-        //     },
-        //     color: ["#7ba3a8", "#f35a4a"],
-        //     series: [
-        //         {
-        //             name: this.title,
-        //             type: 'pie',
-        //             selectedMode: 'single',
-        //             radius: ['40%', '92%'],
-        //             clockwise: true,
-        //             itemStyle: {
-        //                 borderWidth: 5,
-        //                 borderColor: '#fff'
-        //             },
-        //             label: {
-        //                 position: 'inside',
-        //                 formatter: '{b}: \n {c} \n ({d}%)',
-        //                 fontSize: 15, //文字大小
-        //                 fontWeight: 'bold',
-        //             },
-        //             data: [
-        //                 { value: 1400, name: '未获得' },
-        //                 { value: 2700, name: '已获得' },
-        //             ]
-        //         }
-        //     ],
-        //     graphic: { // 添加原生图形元素组件
-        //         elements: [{
-        //             type: 'text', // 组件类型
-        //             left: 'center', //定位
-        //             top: 'center', // 定位
-        //             style: { // 样式
-        //                 text: '英雄\n皮肤', //文字
-        //                 fontSize: 22, //文字大小
-        //                 textAlign: 'center', //定位
-        //                 width: 30,
-        //                 height: 30,
-        //                 fill: 'darkgray' // 字体颜色
-        //             }
-        //         }]
-        //     }
-        // })
-        // myChart2.setOption({
-        //     title: {
-        //         text: this.title
-        //     },
-        //     color: ["#7ba3a8", "#b50dc5"],
-        //     series: [
-        //         {
-        //             name: this.title,
-        //             type: 'pie',
-        //             selectedMode: 'single',
-        //             radius: ['40%', '92%'],
-        //             clockwise: true,
-        //             itemStyle: {
-        //                 borderWidth: 5,
-        //                 borderColor: '#fff'
-        //             },
-        //             label: {
-        //                 position: 'inside',
-        //                 formatter: '{b}: \n {c} \n ({d}%)',
-        //                 fontSize: 15, //文字大小
-        //                 fontWeight: 'bold',
-        //             },
-        //             data: [
-        //                 { value: 1400, name: '未获得' },
-        //                 { value: 2700, name: '已获得' },
-        //             ]
-        //         }
-        //     ],
-        //     graphic: { // 添加原生图形元素组件
-        //         elements: [{
-        //             type: 'text', // 组件类型
-        //             left: 'center', //定位
-        //             top: 'center', // 定位
-        //             style: { // 样式
-        //                 text: '100胜\n称号', //文字
-        //                 fontSize: 22, //文字大小
-        //                 textAlign: 'center', //定位
-        //                 width: 30,
-        //                 height: 30,
-        //                 fill: 'darkgray' // 字体颜色
-        //             }
-        //         }]
-        //     }
-        // })
-        // myChart3.setOption({
-        //     title: {
-        //         text: this.title
-        //     },
-        //     color: ["#7ba3a8", "#008000"],
-        //     series: [
-        //         {
-        //             name: this.title,
-        //             type: 'pie',
-        //             selectedMode: 'single',
-        //             radius: ['40%', '92%'],
-        //             clockwise: true,
-        //             itemStyle: {
-        //                 borderWidth: 5,
-        //                 borderColor: '#fff'
-        //             },
-        //             label: {
-        //                 position: 'inside',
-        //                 formatter: '{b}:\n {c}\n({d}%)',
-        //                 fontSize: 15, //文字大小
-        //                 fontWeight: 'bold',
-        //             },
-        //             data: [
-        //                 { value: 1400, name: '未获得' },
-        //                 { value: 2700, name: '已获得' },
-        //             ]
-        //         }
-        //     ],
-        //     graphic: { // 添加原生图形元素组件
-        //         elements: [{
-        //             type: 'text', // 组件类型
-        //             left: 'center', //定位
-        //             top: 'center', // 定位
-        //             style: { // 样式
-        //                 text: '300胜\n称号', //文字
-        //                 fontSize: 22, //文字大小
-        //                 textAlign: 'center', //定位
-        //                 width: 30,
-        //                 height: 30,
-        //                 fill: 'darkgray' // 字体颜色
-        //             }
-        //         }]
-        //     }
-        // })
-    </script>
+    myChart.setOption({
+        title: {
+            text: this.title
+        },
+        animation: false,
+        color: ["#7ba3a8", "#33CCFF"],
+        series: [
+            {
+                name: this.title,
+                type: 'pie',
+                selectedMode: 'single',
+                radius: ['40%', '92%'],
+                startAngle: 270, //起始角度
+                clockwise: true,
+                itemStyle: {
+                    borderWidth: 5,
+                    borderColor: '#fff'
+                },
+                label: {
+                    position: 'inside',
+                    formatter: '{b}:\n {c}\n({d}%)',
+                    fontSize: 15, //文字大小
+                    fontWeight: 'bold',
+                },
+                data: data1.dataset
+
+            }
+        ],
+        graphic: { // 添加原生图形元素组件
+            elements: [{
+                type: 'text', // 组件类型
+                left: 'center', //定位
+                top: 'center', // 定位
+                style: { // 样式
+                    text: '拥有\n英雄', //文字
+                    fontSize: 22, //文字大小
+                    textAlign: 'center', //定位
+                    width: 30,
+                    height: 30,
+                    fill: 'darkgray' // 字体颜色
+                }
+            }]
+        }
+    })
+    myChart1.setOption({
+        title: {
+            text: this.title
+        },
+        animation: false,
+        color: ["#7ba3a8", "#f35a4a"],
+        series: [
+            {
+                name: this.title,
+                type: 'pie',
+                selectedMode: 'single',
+                radius: ['40%', '92%'],
+                startAngle: 270, //起始角度
+                clockwise: true,
+                itemStyle: {
+                    borderWidth: 5,
+                    borderColor: '#fff'
+                },
+                label: {
+                    position: 'inside',
+                    formatter: '{b}: \n {c} \n ({d}%)',
+                    fontSize: 15, //文字大小
+                    fontWeight: 'bold',
+                },
+                data: data2.dataset
+            }
+        ],
+        graphic: { // 添加原生图形元素组件
+            elements: [{
+                type: 'text', // 组件类型
+                left: 'center', //定位
+                top: 'center', // 定位
+                style: { // 样式
+                    text: '英雄\n皮肤', //文字
+                    fontSize: 22, //文字大小
+                    textAlign: 'center', //定位
+                    width: 30,
+                    height: 30,
+                    fill: 'darkgray' // 字体颜色
+                }
+            }]
+        }
+    })
+    myChart2.setOption({
+        title: {
+            text: this.title
+        },
+        animation: false,
+        color: ["#7ba3a8", "#b50dc5"],
+        series: [
+            {
+                name: this.title,
+                type: 'pie',
+                selectedMode: 'single',
+                radius: ['40%', '92%'],
+                startAngle: 270, //起始角度
+                clockwise: true,
+                itemStyle: {
+                    borderWidth: 5,
+                    borderColor: '#fff'
+                },
+                label: {
+                    position: 'inside',
+                    formatter: '{b}: \n {c} \n ({d}%)',
+                    fontSize: 15, //文字大小
+                    fontWeight: 'bold',
+                },
+                data: data3.dataset
+            }
+        ],
+        graphic: { // 添加原生图形元素组件
+            elements: [{
+                type: 'text', // 组件类型
+                left: 'center', //定位
+                top: 'center', // 定位
+                style: { // 样式
+                    text: '100胜\n称号', //文字
+                    fontSize: 22, //文字大小
+                    textAlign: 'center', //定位
+                    width: 30,
+                    height: 30,
+                    fill: 'darkgray' // 字体颜色
+                }
+            }]
+        }
+    })
+    myChart3.setOption({
+        title: {
+            text: this.title
+        },
+        animation: false,
+        color: ["#7ba3a8", "#008000"],
+        series: [
+            {
+                name: this.title,
+                type: 'pie',
+                selectedMode: 'single',
+                radius: ['40%', '92%'],
+                startAngle: 270, //起始角度
+                clockwise: true,
+                itemStyle: {
+                    borderWidth: 5,
+                    borderColor: '#fff'
+                },
+                label: {
+                    position: 'inside',
+                    formatter: '{b}:\n {c}\n({d}%)',
+                    fontSize: 15, //文字大小
+                    fontWeight: 'bold',
+                },
+                data: data4.dataset
+            }
+        ],
+        graphic: { // 添加原生图形元素组件
+            elements: [{
+                type: 'text', // 组件类型
+                left: 'center', //定位
+                top: 'center', // 定位
+                style: { // 样式
+                    text: '300胜\n称号', //文字
+                    fontSize: 22, //文字大小
+                    textAlign: 'center', //定位
+                    width: 30,
+                    height: 30,
+                    fill: 'darkgray' // 字体颜色
+                }
+            }]
+        }
+    })
+</script>
 </body>
 </html>

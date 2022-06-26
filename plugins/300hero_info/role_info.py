@@ -6,7 +6,7 @@ import jinja2
 from httpx import ConnectTimeout
 from nonebot import logger
 from nonebot_plugin_htmlrender import html_to_pic
-from .data_source import set_role_info_params
+from .data_source import set_role_info_params, hero
 
 dir_path = Path(__file__).parent
 template_path = dir_path / "template"
@@ -23,12 +23,12 @@ async def get_RoleInfo(token: str, name: str):
             "RoleName": name
         }
         async with httpx.AsyncClient() as client:
-            resp = await client.get(url, params=params, timeout=None)
+            resp = await client.post(url, params=params, timeout=None)
             result = resp.json()
             logger.info(f"状态码:{result['code']}")
         if result['code'] == 1 and result['data']:
             template = env.get_template("role-info.html")
-            template_data = await set_role_info_params(result['data'])
+            template_data = await set_role_info_params(result['data'], hero)
             content = await template.render_async(template_data)
             return await html_to_pic(content, wait=0, viewport={"width": 920, "height": 1000})
         elif result['code'] == 500:
