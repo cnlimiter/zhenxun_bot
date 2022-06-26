@@ -1,15 +1,13 @@
-from random import shuffle, randint
 import random
-import os
-from configs.config import NICKNAME
 from pathlib import Path
+from random import shuffle, randint
 
-from sqlalchemy import true
+from configs.config import NICKNAME
+from nonebot import on_command
+from nonebot.adapters.onebot.v11 import Bot, Event, PrivateMessageEvent, GroupMessageEvent
+from nonebot.typing import T_State
 
 from services.log import logger
-from nonebot import on_command
-from nonebot.typing import T_State
-from nonebot.adapters.onebot.v11 import Bot, Event, PrivateMessageEvent, GroupMessageEvent
 
 dir_path = Path(__file__).parent
 IMG_PATH = str((dir_path / "tarot").absolute()) + "/"
@@ -43,7 +41,7 @@ __plugin_count_limit__ = {
     "max_count": 1,    # 每日次数限制数量
     "limit_type": "user",   # 监听对象，以user_id或group_id作为键来限制，'user'：用户id，'group'：群id
     "rst": None,            # 回复的话，为None时不回复，可以添加[at]，[uname]，[nickname]来对应艾特，用户群名称，昵称系统昵称
-    "status": true          # 此限制的开关状态
+    "status": True          # 此限制的开关状态
 }
 
 __plugin_block_limit__ = {"rst": "你的塔罗牌正在抽取..."}
