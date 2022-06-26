@@ -3,10 +3,9 @@ import re
 import traceback
 
 from nonebot import on_command, on_message, get_driver, require, logger
-from nonebot.adapters.onebot.v11 import GROUP, MessageEvent, PrivateMessageEvent, MessageSegment
+from nonebot.adapters.onebot.v11 import GROUP, MessageEvent, PrivateMessageEvent, MessageSegment, Message
 from nonebot.exception import ActionFailed
 from nonebot.params import CommandArg
-from nonebot.permission import Message
 from .utils import DailyNumberLimiter, FreqLimiter
 from .role_info import get_RoleInfo
 
@@ -28,14 +27,12 @@ EXCEED_NOTICE = f'您今天已经冲过{_max}次了，请明早5点后再来！'
 _nlmt = DailyNumberLimiter(_max)
 _flmt = FreqLimiter(3)
 
-
 bot = on_command("sbty", block=True, aliases={"Sbty"}, permission=GROUP, priority=5)
-bot_listen = on_message(priority=5)
 user_token: str = get_driver().config.ty_user_token
 
 
 @bot.handle()
-async def selet_command(ev: MessageEvent, matchmsg: Message = CommandArg()):
+async def selet_command(ev: MessageEvent, arg: Message = CommandArg()):
     try:
         msg = ''
         if isinstance(ev, PrivateMessageEvent):  # 如果是私聊则取消
@@ -50,14 +47,9 @@ async def selet_command(ev: MessageEvent, matchmsg: Message = CommandArg()):
         _flmt.start_cd(qqid)
         _nlmt.increase(qqid)
 
-        search_main = html.unescape(str(matchmsg)).strip()
-        match = re.search(r"sbty (.+)", search_main)
-        if match:
-            search_name = search_main.split()[1]
-            msg = await get_RoleInfo(user_token, search_name)
+        search_name = arg.extract_plain_text().strip()
 
-        else:
-            await bot.send('你输入的玩家名有问题哦~')
+        msg = await get_RoleInfo(user_token, search_name)
 
         if msg:
             if isinstance(msg, str):
