@@ -24,6 +24,10 @@
 
 
 ## 更新
+### 2022/6/26
+* 完成300英雄查询插件
+* 添加[人生重启小游戏](https://github.com/zhenxun-org/nonebot_plugins_zhenxun_bot/tree/master/lifeRestart)插件
+
 ### 2022/6/24
 * 初始化300英雄查询插件
 
